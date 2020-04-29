@@ -11,7 +11,7 @@ import { MessageService } from './message.service';
 @Injectable({ providedIn: 'root' })
 export class ItemService {
 
-  private url = 'localhost:8080';  // URL to web api
+  private url = 'http://localhost:8080';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,17 +21,16 @@ export class ItemService {
     private http: HttpClient,
     private messageService: MessageService) { }
 
-  /** GET items from the server */
-  getItems(): Observable<Item[]> {
-    const url = `${this.url}/items`;
-    return this.http.get<Item[]>(this.url)
-      .pipe(
-        tap(_ => this.log('fetched items')),
-        catchError(this.handleError<Item[]>('getItems', []))
-      );
+
+  getCategories(): Observable<string[]> {
+    const url = `${this.url}/categories`;
+    return this.http.get<string[]>(url).pipe(
+      tap(_ => this.log(`fetched categories`)),
+      catchError(this.handleError<string[]>(`getCategories`))
+    );
   }
 
-  /** GET items by id. Return `undefined` when id not found */
+  /** GET item by id. Return `undefined` when id not found */
   getItemNo404<Data>(id: number): Observable<Item> {
     const url = `${this.url}/id/${id}`;
     return this.http.get<Item[]>(url)

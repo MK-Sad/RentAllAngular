@@ -1,6 +1,11 @@
 <div class="panel right">
+
+  <select [(ngModel)]="selectedCategory" (change)="changeCategory()">
+    <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+  </select>
+
   <div class="item" *ngFor="let item of items">
-    <h2>{{item.name}}:</h2>
+    <h2>{{item.name}}</h2>
     <div><span>owner: </span>{{item.owner}}</div>
     <div><span>description: </span>{{item.description}}</div>
   </div>

@@ -10,9 +10,13 @@ import { ItemService } from '../item.service';
 export class ItemsComponent implements OnInit {
 
   items: Item[];
+  categories: string[];
+  category: string;
+  selectedCategory: string;
 
   constructor(private itemService: ItemService) { }
 
+  //test, not used now
   item: Item = {
     id: 1,
     name: "Wiertarka",
@@ -23,21 +27,24 @@ export class ItemsComponent implements OnInit {
     rented: false
   }
 
-  getItemsByCategory(): void {
-    const category = "TOOLS";
+  getItemsByCategory(category: string): void {
     this.itemService.searchItemsByCategory(category)
       .subscribe(items => this.items = items);
   }
 
-  getItems(): void {
-    this.itemService.getItems()
-    .subscribe(items => this.items = items);
+  getCategories(): void {
+    this.itemService.getCategories()
+    .subscribe(categories => this.categories = categories);
   }
 
-
+  changeCategory(): void {
+    this.getItemsByCategory(this.selectedCategory);
+  }
 
   ngOnInit(): void {
-    this.getItemsByCategory();
+    this.getCategories();
+    this.selectedCategory = "TOOLS";
+    this.getItemsByCategory(this.selectedCategory);
   }
 
 }

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {FormsModule} from '@angular/forms';  
 
 import { ItemsComponent }      from './items/items.component';
 import { RentalsComponent } from './rentals/rentals.component';
@@ -15,12 +16,13 @@ import { MessagesComponent } from './messages/messages.component';
     AppComponent,
     RentalsComponent,
     ItemsComponent,
-    MessagesComponent
+    MessagesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
