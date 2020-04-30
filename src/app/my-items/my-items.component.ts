@@ -23,4 +23,10 @@ export class MyItemsComponent implements OnInit {
       .subscribe(items => this.items = items);
   }
 
+  changeAvailable(item: Item) : void {
+    this.itemService.updateItem(item)
+    .subscribe(item => {});
+    //TODO right panel refresh
+  }
+
 }

@@ -99,7 +99,8 @@ export class ItemService {
   }
 
   updateItem(item: Item): Observable<any> {
-    return this.http.put(this.url, item, this.httpOptions).pipe(
+    const url = `${this.url}/item`; ///${item.id}
+    return this.http.put(url, item, this.httpOptions).pipe(
       tap(_ => this.log(`updated item id=${item.id}`)),
       catchError(this.handleError<any>('updateItem'))
     );
