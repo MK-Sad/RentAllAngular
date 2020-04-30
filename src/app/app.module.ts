@@ -10,6 +10,7 @@ import { RentalsComponent } from './rentals/rentals.component';
 
 import { HttpClientModule }    from '@angular/common/http';
 import { MessagesComponent } from './messages/messages.component';
+import { MyItemsComponent } from './my-items/my-items.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { MessagesComponent } from './messages/messages.component';
     RentalsComponent,
     ItemsComponent,
     MessagesComponent,
+    MyItemsComponent,
   ],
   imports: [
     BrowserModule,

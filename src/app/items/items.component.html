@@ -1,13 +1,12 @@
-<div class="panel right">
+<span>ITEMS FOR RENT - Select category: </span>
 
-  <select [(ngModel)]="selectedCategory" (change)="changeCategory()">
-    <option *ngFor="let category of categories" [value]="category">{{category}}</option>
-  </select>
+<select [(ngModel)]="selectedCategory" (change)="changeCategory()">
+  <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+</select>
 
-  <div class="item" *ngFor="let item of items">
-    <h2>{{item.name}}</h2>
-    <div><span>owner: </span>{{item.owner}}</div>
-    <div><span>description: </span>{{item.description}}</div>
-    <button (click)="rentIt($event, item)">Rent {{ item.name }} for 3days</button> 
-  </div>
+<div class="item" *ngFor="let item of items">
+  <button (click)="rentIt($event, item)">Rent {{ item.name }} for 3days</button> 
+  <h2>{{item.name}}</h2>
+  <div><span>owner: </span>{{item.owner}}</div>
+  <div><span>description: </span>{{item.description}}</div>
 </div>

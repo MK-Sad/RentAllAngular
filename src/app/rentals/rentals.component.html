@@ -1,3 +1,7 @@
-<div class="panel left">
-    <p>rentals works!</p>
+<span>My rentals:</span>
+
+<div class="item" *ngFor="let rental of rentals">
+  <h2>item.name</h2>
+  <div><span>rental item: </span>{{rental.itemId}}</div>
+  <div><span>rental date: </span>{{rental.rentalDate| date:'dd/MM/yyyy' : 'UTC'}}</div>
 </div>

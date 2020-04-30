@@ -1,0 +1,9 @@
+<span>My items to rent</span>
+
+<div class="item" *ngFor="let item of items">
+    <h2>{{item.name}}</h2>
+    <div><span>category: </span>{{item.category}}</div>
+    <div><span>description: </span>{{item.description}}</div>
+    <div><span>rented: </span>{{item.rented}}</div>
+    <div><span>available: </span>{{item.available}}</div>
+</div>

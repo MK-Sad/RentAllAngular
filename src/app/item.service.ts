@@ -53,7 +53,6 @@ export class ItemService {
     );
   }
 
-  /* GET items whose name contains search term */
   searchItemsByCategory(category: string): Observable<Item[]> {
     if (!category.trim()) {
       // if not search term, return empty hero array.
@@ -64,6 +63,19 @@ export class ItemService {
          this.log(`found items matching "${category}"`) :
          this.log(`no items matching "${category}"`)),
       catchError(this.handleError<Item[]>('searchItemsByCategory', []))
+    );
+  }
+
+  searchItemsByOwner(ownerName: string): Observable<Item[]> {
+    if (!ownerName.trim()) {
+      // if not search term, return empty hero array.
+      return of([]);
+    }
+    return this.http.get<Item[]>(`${this.url}/item/owner/${ownerName}`).pipe(
+      tap(x => x.length ?
+         this.log(`found items matching "${ownerName}"`) :
+         this.log(`no items matching "${ownerName}"`)),
+      catchError(this.handleError<Item[]>('searchItemsByOwner', []))
     );
   }
 

@@ -6,3 +6,5 @@ export interface Rental {
     returnDate: string;
     rentalPeriod: number;
   }
+
+  
