@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from './item';
+import { Item } from '../item';
+import { Rental } from '../rental';
 import { ItemService } from '../item.service';
+import { RentalService } from '../rental.service';
 
 @Component({
   selector: 'app-items',
@@ -14,18 +16,7 @@ export class ItemsComponent implements OnInit {
   category: string;
   selectedCategory: string;
 
-  constructor(private itemService: ItemService) { }
-
-  //test, not used now
-  item: Item = {
-    id: 1,
-    name: "Wiertarka",
-    category: "TOOLS",
-    owner: "Robert",
-    description: "popsuta",
-    available: true,
-    rented: false
-  }
+  constructor(private itemService: ItemService, private rentalService: RentalService) { }
 
   getItemsByCategory(category: string): void {
     this.itemService.searchItemsByCategory(category)
@@ -39,6 +30,18 @@ export class ItemsComponent implements OnInit {
 
   changeCategory(): void {
     this.getItemsByCategory(this.selectedCategory);
+  }
+
+  rentIt(event, item: Item): void {
+    var rental: Rental = { 
+      id: null,
+      userName: "Robert",
+      itemId: item.id,
+      rentalDate: null,
+      returnDate: null,
+      rentalPeriod: 3 };
+    this.rentalService.addRental(rental)
+      .subscribe(rental => {console.log("Rental has been saved: " + rental.id)});
   }
 
   ngOnInit(): void {

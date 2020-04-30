@@ -8,5 +8,6 @@
     <h2>{{item.name}}</h2>
     <div><span>owner: </span>{{item.owner}}</div>
     <div><span>description: </span>{{item.description}}</div>
+    <button (click)="rentIt($event, item)">Rent {{ item.name }} for 3days</button> 
   </div>
 </div>
