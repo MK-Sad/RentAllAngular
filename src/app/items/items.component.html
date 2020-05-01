@@ -5,8 +5,15 @@
 </select>
 
 <div class="item" *ngFor="let item of items">
-  <button (click)="rentIt($event, item)">Rent {{ item.name }} for 3days</button> 
-  <h2>{{item.name}}</h2>
-  <div><span>owner: </span>{{item.owner}}</div>
-  <div><span>description: </span>{{item.description}}</div>
+
+  <div class="item-left">
+    <h2>{{item.name}}</h2>
+    <div><span>owner: </span>{{item.owner}}</div>
+    <div><span>description: </span>{{item.description}}</div>
+  </div>
+
+  <div class="item-right">
+    <button (click)="rentIt($event, item)">Rent {{ item.name }} for 3days</button>
+  </div>
+
 </div>

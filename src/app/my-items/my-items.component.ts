@@ -9,19 +9,27 @@ import { ItemService } from '../item.service';
 })
 export class MyItemsComponent implements OnInit {
 
-  loggerUserName: string = "Robert";
+  loggerUserName: string;
   items: Item[];
 
   constructor(private itemService: ItemService) { }
 
   ngOnInit(): void {
-    this.getItemsByOwnerName("Robert");
+    this.loggerUserName = "Robert";
+    this.getItemsByOwnerName(this.loggerUserName);
   }
 
   getItemsByOwnerName(ownerName: string): void {
     this.itemService.searchItemsByOwner(ownerName)
       .subscribe(items => this.items = items);
   }
+
+  itemReturned(item : Item) {
+    this.itemService.returnItem(item.id)
+      .subscribe(rental => {
+        item.rented = false;
+      });
+  } 
 
   changeAvailable(item: Item) : void {
     this.itemService.updateItem(item)

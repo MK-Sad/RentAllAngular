@@ -105,6 +105,14 @@ export class ItemService {
       catchError(this.handleError<any>('updateItem'))
     );
   }
+  
+  returnItem(itemId: number): Observable<any> {
+    const url = `${this.url}/returnItem/${itemId}`;
+    return this.http.put(url, this.httpOptions).pipe(
+      tap(_ => this.log(`returned item id=${itemId}`)),
+      catchError(this.handleError<any>('returnItem'))
+    );
+  }
 
   /**
    * Handle Http operation that failed.
