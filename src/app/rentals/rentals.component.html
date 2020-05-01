@@ -1,7 +1,18 @@
-<span>My rentals:</span>
+<h2>My rentals:</h2>
 
 <div class="item" *ngFor="let rental of rentals">
-  <h2>item.name</h2>
-  <div><span>rental item: </span>{{rental.itemId}}</div>
-  <div><span>rental date: </span>{{rental.rentalDate| date:'dd/MM/yyyy' : 'UTC'}}</div>
+
+  <div class="item-left">
+    <h2>{{rental.item.name}}</h2>
+    <div><span>category: </span>{{rental.item.category}}</div>
+    <div><span>description: </span>{{rental.item.description}}</div>
+  </div>
+
+  <div class="item-right">
+    <div><span>owner: </span>{{rental.item.owner}}</div>
+    <div><span>rental date: </span>{{rental.rentalDate| date:'dd/MM/yyyy' : 'UTC'}}</div>
+    <div><span>rented for: </span>{{rental.rentalPeriod}}<span> days</span></div>
+    <div><span>only </span>{{diff(rental.rentalDate)}}<span> days left</span></div>
+  </div>
+
 </div>

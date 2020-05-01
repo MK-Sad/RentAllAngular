@@ -1,4 +1,4 @@
-<span>My items to rent</span>
+<h2>My items to rent</h2>
 
 <div class="item" *ngFor="let item of items">
 
@@ -14,7 +14,8 @@
                 <span>Item is rented  </span><button (click)="itemReturned(item)">Confirm Return</button>
             </div>
             <div *ngIf="!item.rented">
-                <span>Item is ready to rent</span>
+                <span *ngIf="item.available">Item is ready to rent</span>
+                <span *ngIf="!item.available">Item is not available</span>
             </div>     
         </div>
         <div>

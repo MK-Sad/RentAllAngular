@@ -1,8 +1,9 @@
-<span>ITEMS FOR RENT - Select category: </span>
-
-<select [(ngModel)]="selectedCategory" (change)="changeCategory()">
-  <option *ngFor="let category of categories" [value]="category">{{category}}</option>
-</select>
+<h2>
+  ITEMS FOR RENT - Select category: 
+  <select [(ngModel)]="selectedCategory" (change)="changeCategory()">
+    <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+  </select>
+</h2>
 
 <div class="item" *ngFor="let item of items">
 

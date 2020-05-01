@@ -19,10 +19,28 @@ export class RentalsComponent implements OnInit {
 
   rentals: Rental[];
   loggedUserName: string = "Robert";
+  currentDate = new Date();
 
   getRentalsByUserName(): void {
     this.rentalService.searchRentalsByUserName(this.loggedUserName)
-      .subscribe(rentals => this.rentals = rentals);
+      .subscribe(rentals => {
+        rentals.map(rental => {
+          this.getItemByRental(rental)
+        });
+        this.rentals = rentals;
+      }
+      );
+  }
+
+  getItemByRental(rental: Rental): void {
+    this.itemService.getItem(rental.itemId)
+      .subscribe(item => 
+        rental['item'] = item
+      );
+  }
+
+  diff(rentalDate: string): number {
+    return Math.floor(( Number(this.currentDate) - Date.parse(rentalDate) ) / 86400000); 
   }
 
   //localStorage.setItem(key, value);

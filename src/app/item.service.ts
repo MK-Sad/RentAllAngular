@@ -46,7 +46,7 @@ export class ItemService {
 
   /** GET item by id. Will 404 if id not found */
   getItem(id: number): Observable<Item> {
-    const url = `${this.url}/${id}`;
+    const url = `${this.url}/item/${id}`;
     return this.http.get<Item>(url).pipe(
       tap(_ => this.log(`fetched item id=${id}`)),
       catchError(this.handleError<Item>(`getItem id=${id}`))
