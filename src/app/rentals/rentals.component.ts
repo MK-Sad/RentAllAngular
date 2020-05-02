@@ -3,6 +3,7 @@ import { Item } from '../item';
 import { Rental } from '../rental';
 import { ItemService } from '../item.service';
 import { RentalService } from '../rental.service';
+import { UserNameService } from '../userName.service';
 
 @Component({
   selector: 'app-rentals',
@@ -11,15 +12,20 @@ import { RentalService } from '../rental.service';
 })
 export class RentalsComponent implements OnInit {
 
-  constructor(private itemService: ItemService, private rentalService: RentalService) { }
+  private _subscription_userName: any;
+  loggedUserName: string  = "Robert";
+  rentals: Rental[];
+  currentDate:number = Number(new Date());
+
+  constructor(private itemService: ItemService, private rentalService: RentalService, private userNameService : UserNameService) {
+    this._subscription_userName = this.userNameService.execChange.subscribe((value) => {
+        this.loggedUserName = value;
+    });
+   }
 
   ngOnInit(): void {
     this.getRentalsByUserName();
   }
-
-  rentals: Rental[];
-  loggedUserName: string = "Robert";
-  currentDate:number = Number(new Date());
 
   getRentalsByUserName(): void {
     this.rentalService.searchRentalsByUserName(this.loggedUserName)
@@ -43,6 +49,8 @@ export class RentalsComponent implements OnInit {
     return rentalPeriod - Math.floor((this.currentDate - Date.parse(rentalDate) ) / 86400000); 
   }
 
-  //localStorage.setItem(key, value);
+  ngOnDestroy(): void {
+    this._subscription_userName.unsubscribe();
+  }
 
 }
