@@ -19,7 +19,7 @@ export class RentalsComponent implements OnInit {
 
   rentals: Rental[];
   loggedUserName: string = "Robert";
-  currentDate = new Date();
+  currentDate:number = Number(new Date());
 
   getRentalsByUserName(): void {
     this.rentalService.searchRentalsByUserName(this.loggedUserName)
@@ -40,7 +40,7 @@ export class RentalsComponent implements OnInit {
   }
 
   diff(rentalDate: string, rentalPeriod: number): number {
-    return rentalPeriod - Math.floor((Number(this.currentDate) - Date.parse(rentalDate) ) / 86400000); 
+    return rentalPeriod - Math.floor((this.currentDate - Date.parse(rentalDate) ) / 86400000); 
   }
 
   //localStorage.setItem(key, value);
