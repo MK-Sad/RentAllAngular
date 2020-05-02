@@ -39,8 +39,8 @@ export class RentalsComponent implements OnInit {
       );
   }
 
-  diff(rentalDate: string): number {
-    return Math.floor(( Number(this.currentDate) - Date.parse(rentalDate) ) / 86400000); 
+  diff(rentalDate: string, rentalPeriod: number): number {
+    return rentalPeriod - Math.floor((Number(this.currentDate) - Date.parse(rentalDate) ) / 86400000); 
   }
 
   //localStorage.setItem(key, value);
