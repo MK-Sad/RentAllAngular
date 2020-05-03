@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../item';
 import { ItemService } from '../item.service';
+import { UserNameService } from '../userName.service';
 
 @Component({
   selector: 'app-my-items',
@@ -9,14 +10,18 @@ import { ItemService } from '../item.service';
 })
 export class MyItemsComponent implements OnInit {
 
-  loggerUserName: string;
+  private _subscription_userName: any;
+  loggedUserName: string;
   items: Item[];
 
-  constructor(private itemService: ItemService) { }
+  constructor(private itemService: ItemService, private userNameService : UserNameService) {
+    this._subscription_userName = this.userNameService.execChange.subscribe((value) => {
+        this.loggedUserName = value;
+        this.getItemsByOwnerName(this.loggedUserName);
+    });
+   }
 
   ngOnInit(): void {
-    this.loggerUserName = "Robert";
-    this.getItemsByOwnerName(this.loggerUserName);
   }
 
   getItemsByOwnerName(ownerName: string): void {
@@ -35,6 +40,10 @@ export class MyItemsComponent implements OnInit {
     this.itemService.updateItem(item)
     .subscribe(item => {});
     //TODO right panel refresh
+  }
+
+  ngOnDestroy(): void {
+    this._subscription_userName.unsubscribe();
   }
 
 }

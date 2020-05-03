@@ -13,13 +13,14 @@ import { UserNameService } from '../userName.service';
 export class RentalsComponent implements OnInit {
 
   private _subscription_userName: any;
-  loggedUserName: string  = "Robert";
+  loggedUserName: string;
   rentals: Rental[];
   currentDate:number = Number(new Date());
 
   constructor(private itemService: ItemService, private rentalService: RentalService, private userNameService : UserNameService) {
     this._subscription_userName = this.userNameService.execChange.subscribe((value) => {
         this.loggedUserName = value;
+        this.getRentalsByUserName();
     });
    }
 

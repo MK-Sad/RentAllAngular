@@ -3,6 +3,7 @@ import { Item } from '../item';
 import { Rental } from '../rental';
 import { ItemService } from '../item.service';
 import { RentalService } from '../rental.service';
+import { UserNameService } from '../userName.service';
 
 @Component({
   selector: 'app-items',
@@ -11,12 +12,24 @@ import { RentalService } from '../rental.service';
 })
 export class ItemsComponent implements OnInit {
 
+  private _subscription_userName: any;
+  loggedUserName: string;
   items: Item[];
   categories: string[];
   category: string;
   selectedCategory: string;
 
-  constructor(private itemService: ItemService, private rentalService: RentalService) { }
+  constructor(private itemService: ItemService, private rentalService: RentalService, private userNameService : UserNameService) {
+    this._subscription_userName = this.userNameService.execChange.subscribe((value) => {
+        this.loggedUserName = value;
+        this.getItemsByCategory(this.selectedCategory);
+    });
+   }
+
+  ngOnInit(): void {
+    this.getCategories();
+    this.selectedCategory = "TOOLS";
+  }
 
   getItemsByCategory(category: string): void {
     this.itemService.searchItemsByCategory(category)
@@ -35,7 +48,7 @@ export class ItemsComponent implements OnInit {
   rentIt(event, item: Item): void {
     var rental: Rental = { 
       id: null,
-      userName: "Robert",
+      userName: this.loggedUserName,
       itemId: item.id,
       rentalDate: null,
       returnDate: null,
@@ -44,10 +57,8 @@ export class ItemsComponent implements OnInit {
       .subscribe(rental => {console.log("Rental has been saved: " + rental.id)});
   }
 
-  ngOnInit(): void {
-    this.getCategories();
-    this.selectedCategory = "TOOLS";
-    this.getItemsByCategory(this.selectedCategory);
+  ngOnDestroy(): void {
+    this._subscription_userName.unsubscribe();
   }
 
 }

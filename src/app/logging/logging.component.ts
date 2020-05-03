@@ -10,12 +10,13 @@ export class LoggingComponent implements OnInit {
 
   constructor(private userNameService: UserNameService) {}
 
-  changeUserName(name: string): void {
-    this.userNameService.userNameChange("Robert");
+  loggedUserName: string;
+
+  changeUserName(): void {
+    this.userNameService.userNameChange(this.loggedUserName);
   }
 
   ngOnInit(): void {
-    this.changeUserName("Robert")
   }
 
 }

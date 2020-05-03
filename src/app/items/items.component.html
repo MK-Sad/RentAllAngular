@@ -3,6 +3,7 @@
   <select [(ngModel)]="selectedCategory" (change)="changeCategory()">
     <option *ngFor="let category of categories" [value]="category">{{category}}</option>
   </select>
+  {{loggedUserName}}
 </h2>
 
 <div class="item" *ngFor="let item of items">
