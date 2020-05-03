@@ -1,4 +1,4 @@
-<h2>My rentals: {{loggedUserName}}</h2>
+<h2>My rentals</h2>
 
 <div class="item" *ngFor="let rental of rentals" 
 [style.background]="diff(rental.rentalDate, rental.rentalPeriod) < 1 ? 'rgb(255, 70, 70, 0.1)' : null">

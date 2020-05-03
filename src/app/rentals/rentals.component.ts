@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Item } from '../item';
 import { Rental } from '../rental';
+import { RentalView } from '../rentalView';
 import { ItemService } from '../item.service';
 import { RentalService } from '../rental.service';
 import { UserNameService } from '../userName.service';
+import { Observable } from 'rxjs';
+import { map, flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-rentals',
   templateUrl: './rentals.component.html',
   styleUrls: ['./rentals.component.css']
 })
-export class RentalsComponent implements OnInit {
+export class RentalsComponent implements OnInit, OnDestroy {
 
   private _subscription_userName: any;
   loggedUserName: string;
@@ -25,7 +28,6 @@ export class RentalsComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.getRentalsByUserName();
   }
 
   getRentalsByUserName(): void {

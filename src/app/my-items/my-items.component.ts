@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Item } from '../item';
 import { ItemService } from '../item.service';
 import { UserNameService } from '../userName.service';
@@ -8,7 +8,7 @@ import { UserNameService } from '../userName.service';
   templateUrl: './my-items.component.html',
   styleUrls: ['./my-items.component.css']
 })
-export class MyItemsComponent implements OnInit {
+export class MyItemsComponent implements OnInit, OnDestroy {
 
   private _subscription_userName: any;
   loggedUserName: string;

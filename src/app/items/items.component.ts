@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Item } from '../item';
 import { Rental } from '../rental';
 import { ItemService } from '../item.service';
@@ -10,7 +10,7 @@ import { UserNameService } from '../userName.service';
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.css']
 })
-export class ItemsComponent implements OnInit {
+export class ItemsComponent implements OnInit, OnDestroy {
 
   private _subscription_userName: any;
   loggedUserName: string;
@@ -22,17 +22,18 @@ export class ItemsComponent implements OnInit {
   constructor(private itemService: ItemService, private rentalService: RentalService, private userNameService : UserNameService) {
     this._subscription_userName = this.userNameService.execChange.subscribe((value) => {
         this.loggedUserName = value;
-        this.getItemsByCategory(this.selectedCategory);
+        this.getItemsByCategory();
     });
    }
 
   ngOnInit(): void {
     this.getCategories();
     this.selectedCategory = "TOOLS";
+    this.getItemsByCategory();
   }
 
-  getItemsByCategory(category: string): void {
-    this.itemService.searchItemsByCategory(category)
+  getItemsByCategory(): void {
+    this.itemService.searchItemsByCategory(this.selectedCategory)
       .subscribe(items => this.items = items);
   }
 
@@ -42,7 +43,7 @@ export class ItemsComponent implements OnInit {
   }
 
   changeCategory(): void {
-    this.getItemsByCategory(this.selectedCategory);
+    this.getItemsByCategory();
   }
 
   rentIt(event, item: Item): void {
