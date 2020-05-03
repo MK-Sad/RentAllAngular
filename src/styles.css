@@ -4,6 +4,7 @@
   left: 0;
   right: 0;
   height: 100px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .center {
@@ -50,7 +51,7 @@
   float: left;
 }
 
-.clikable:hover div {
+.clickable:hover div {
   transition: transform .4s;
   background: rgb(211, 211, 211, 0.5)
 }

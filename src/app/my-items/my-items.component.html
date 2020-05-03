@@ -24,7 +24,7 @@
             <label for="available">available to rent</label>
         </div>
         <div>     
-            <button>Edit</button>
+            <button (click)="openAddItem(item)">Edit</button>
         </div>
     </div>
 
@@ -34,7 +34,7 @@
     <h2>No items found</h2>
 </div>
 
-<a *ngIf="loggedUserName != undefined" class="clikable" (click)="openAddItem()">
+<a *ngIf="loggedUserName != undefined" class="clickable" (click)="openAddItem(null)">
     <div class="item center">
         <h2>Add new item</h2>
     </div>

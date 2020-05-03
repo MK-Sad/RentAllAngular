@@ -42,7 +42,7 @@ export class MyItemsComponent implements OnInit, OnDestroy {
     //TODO right panel refresh
   }
 
-  openAddItem() : void {
+  openAddItem(item: Item) : void {
     console.log("New item");
   }
 
