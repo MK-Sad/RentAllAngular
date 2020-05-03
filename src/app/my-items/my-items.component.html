@@ -30,6 +30,12 @@
 
 </div>
 
+<a *ngIf="loggedUserName != undefined" class="clikable" (click)="openAddItem()">
+    <div class="item center">
+        <h2>Add new item</h2>
+    </div>
+</a>
+
 <div *ngIf="items == undefined || items.length == 0" class="item center">
     <h2>No items found</h2>
 </div>

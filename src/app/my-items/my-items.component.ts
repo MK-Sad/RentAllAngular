@@ -42,6 +42,10 @@ export class MyItemsComponent implements OnInit, OnDestroy {
     //TODO right panel refresh
   }
 
+  openAddItem() : void {
+    console.log("New item");
+  }
+
   ngOnDestroy(): void {
     this._subscription_userName.unsubscribe();
   }
