@@ -13,6 +13,7 @@ import { HttpClientModule }    from '@angular/common/http';
 import { MessagesComponent } from './messages/messages.component';
 import { MyItemsComponent } from './my-items/my-items.component';
 import { LoggingComponent } from './logging/logging.component';
+import { EditWindowComponent } from './my-items/edit-window/edit-window.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { LoggingComponent } from './logging/logging.component';
     MessagesComponent,
     MyItemsComponent,
     LoggingComponent,
+    EditWindowComponent,
   ],
   imports: [
     BrowserModule,
