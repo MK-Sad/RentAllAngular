@@ -1,18 +1,22 @@
 <div class="pop-up" *ngIf="popUpOpen">
 <div class="pop-up-box">
-    <header>
-      <span class="title">Edit your item</span>
-    </header>
-    <main>
-        <p>Name: <input type="text" [(ngModel)]="popUpItem.name"/></p>
-        <p>Description: <input type="text" [(ngModel)]="popUpItem.description"/></p>
-        <select [(ngModel)]="popUpItem.category">
-          <option *ngFor="let category of categories" [value]="category">{{category}}</option>
-        </select>
-    </main>
-    <footer>
-      <button (click)="saveItem()">Save</button>
-      <button (click)="closePopup()">Cancel</button>
-    </footer>
+  <h2>
+    <span class="title">Edit your item</span>
+  </h2>
+  <main>
+    <p>Name:</p> 
+    <p><input type="text" [(ngModel)]="popUpItem.name"/></p>
+    <p>Description:</p> 
+    <p><input type="text" [(ngModel)]="popUpItem.description"/></p>
+    <p>Category:
+      <select [(ngModel)]="popUpItem.category">
+        <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+      </select>
+    </p>
+  </main>
+  <footer>
+    <button (click)="saveItem()">Save</button>
+    <button (click)="closePopup()">Cancel</button>
+  </footer>
 </div>
 </div>

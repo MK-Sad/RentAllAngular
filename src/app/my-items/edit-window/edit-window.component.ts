@@ -9,8 +9,9 @@ import { ItemService } from 'src/app/item.service';
 })
 export class EditWindowComponent implements OnInit {
 
-  @Input('popUpOpen') popUpOpen: boolean;
-  @Input('popUpItem') popUpItem: Item;
+  @Input() popUpOpen: boolean;
+  @Input() popUpItem: Item;
+  @Input() myCallback: Function; 
 
   categories: string[];
   private element: any;
@@ -33,15 +34,16 @@ export class EditWindowComponent implements OnInit {
 
   saveItem(){
     this.popUpOpen = false;
+    this.myCallback(this.popUpItem);
   }
 
   closePopup(){
     this.popUpOpen = false;
+    this.myCallback(null);
   }
 
   getCategories(): void {
     this.itemService.getCategories()
     .subscribe(categories => this.categories = categories);
-    console.log(this.popUpItem.name);
   }
 }

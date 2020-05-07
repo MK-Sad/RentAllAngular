@@ -15,6 +15,8 @@ export class MyItemsComponent implements OnInit, OnDestroy {
   private _subscription_userName: any;
   loggedUserName: string;
   items: Item[];
+  theBoundCallback: Function;
+
 
   constructor(private itemService: ItemService, private userNameService : UserNameService) {
     this._subscription_userName = this.userNameService.execChange.subscribe((value) => {
@@ -24,6 +26,15 @@ export class MyItemsComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit(): void {
+    this.theBoundCallback = this.theCallback.bind(this);
+  }
+
+  public theCallback(item: Item){
+    this.popUpOpen = false;
+    if (item != null) {
+      this.itemService.updateItem(item)
+      .subscribe(item => this.popUpItem = item);
+    }
   }
 
   getItemsByOwnerName(ownerName: string): void {
