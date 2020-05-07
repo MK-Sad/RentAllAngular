@@ -10,6 +10,8 @@ import { UserNameService } from '../userName.service';
 })
 export class MyItemsComponent implements OnInit, OnDestroy {
 
+  popUpOpen: boolean = false;
+  popUpItem: Item;
   private _subscription_userName: any;
   loggedUserName: string;
   items: Item[];
@@ -42,8 +44,22 @@ export class MyItemsComponent implements OnInit, OnDestroy {
     //TODO right panel refresh
   }
 
-  openAddItem(item: Item) : void {
-    console.log("New item");
+  openAddItem() : void {
+    this.popUpItem = {
+      id: null,
+      name: null,
+      category: null,
+      owner: this.loggedUserName,
+      description: null,
+      available: false,
+      rented: false
+    };
+    this.popUpOpen = true;
+  }
+
+  openEditItem(item: Item) : void {
+    this.popUpItem = item;
+    this.popUpOpen = true;
   }
 
   ngOnDestroy(): void {
