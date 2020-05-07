@@ -1,22 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Item } from '../item';
 import { ItemService } from '../item.service';
+import { UserNameService } from '../userName.service';
 
 @Component({
   selector: 'app-my-items',
   templateUrl: './my-items.component.html',
   styleUrls: ['./my-items.component.css']
 })
-export class MyItemsComponent implements OnInit {
+export class MyItemsComponent implements OnInit, OnDestroy {
 
-  loggerUserName: string;
+  popUpOpen: boolean = false;
+  popUpItem: Item;
+  private _subscription_userName: any;
+  loggedUserName: string;
   items: Item[];
+  theBoundCallback: Function;
 
-  constructor(private itemService: ItemService) { }
+
+  constructor(private itemService: ItemService, private userNameService : UserNameService) {
+    this._subscription_userName = this.userNameService.execChange.subscribe((value) => {
+        this.loggedUserName = value;
+        this.getItemsByOwnerName(this.loggedUserName);
+    });
+   }
 
   ngOnInit(): void {
-    this.loggerUserName = "Robert";
-    this.getItemsByOwnerName(this.loggerUserName);
+    this.theBoundCallback = this.theCallback.bind(this);
+  }
+
+  public theCallback(item: Item){
+    this.popUpOpen = false;
+    if (item != null) {
+      this.itemService.updateItem(item)
+      .subscribe(item => this.popUpItem = item);
+    }
   }
 
   getItemsByOwnerName(ownerName: string): void {
@@ -35,6 +53,28 @@ export class MyItemsComponent implements OnInit {
     this.itemService.updateItem(item)
     .subscribe(item => {});
     //TODO right panel refresh
+  }
+
+  openAddItem() : void {
+    this.popUpItem = {
+      id: null,
+      name: null,
+      category: null,
+      owner: this.loggedUserName,
+      description: null,
+      available: false,
+      rented: false
+    };
+    this.popUpOpen = true;
+  }
+
+  openEditItem(item: Item) : void {
+    this.popUpItem = item;
+    this.popUpOpen = true;
+  }
+
+  ngOnDestroy(): void {
+    this._subscription_userName.unsubscribe();
   }
 
 }

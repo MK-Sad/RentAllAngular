@@ -1,0 +1,7 @@
+<select [(ngModel)]="loggedUserName" (change)="changeUserName()">
+    <option value = "Robert">Robert</option>
+    <option value = "Monika">Monika</option>
+    <option value = "Kazik">Kazik</option>
+</select>
+Logged as: {{loggedUserName}}
+<button (click)="changeUserName()">Reload</button>

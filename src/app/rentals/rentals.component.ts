@@ -1,25 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Item } from '../item';
 import { Rental } from '../rental';
+import { RentalView } from '../rentalView';
 import { ItemService } from '../item.service';
 import { RentalService } from '../rental.service';
+import { UserNameService } from '../userName.service';
+import { Observable } from 'rxjs';
+import { map, flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-rentals',
   templateUrl: './rentals.component.html',
   styleUrls: ['./rentals.component.css']
 })
-export class RentalsComponent implements OnInit {
+export class RentalsComponent implements OnInit, OnDestroy {
 
-  constructor(private itemService: ItemService, private rentalService: RentalService) { }
+  private _subscription_userName: any;
+  loggedUserName: string;
+  rentals: Rental[];
+  currentDate:number = Number(new Date());
+
+  constructor(private itemService: ItemService, private rentalService: RentalService, private userNameService : UserNameService) {
+    this._subscription_userName = this.userNameService.execChange.subscribe((value) => {
+        this.loggedUserName = value;
+        this.getRentalsByUserName();
+    });
+   }
 
   ngOnInit(): void {
-    this.getRentalsByUserName();
   }
-
-  rentals: Rental[];
-  loggedUserName: string = "Robert";
-  currentDate:number = Number(new Date());
 
   getRentalsByUserName(): void {
     this.rentalService.searchRentalsByUserName(this.loggedUserName)
@@ -43,6 +52,8 @@ export class RentalsComponent implements OnInit {
     return rentalPeriod - Math.floor((this.currentDate - Date.parse(rentalDate) ) / 86400000); 
   }
 
-  //localStorage.setItem(key, value);
+  ngOnDestroy(): void {
+    this._subscription_userName.unsubscribe();
+  }
 
 }
