@@ -1,6 +1,6 @@
 <h2>My items to rent</h2>
 
-<div class="item" *ngFor="let item of items">
+<div class="item" *ngFor="let item of items; index as i">
 
     <div class="item-left">
         <h2>{{item.name}}</h2>
@@ -24,7 +24,7 @@
             <label for="available">available to rent</label>
         </div>
         <div>     
-            <button (click)="openEditItem(item)">Edit</button>
+            <button (click)="openEditItem(item, i)">Edit</button>
         </div>
     </div>
 
