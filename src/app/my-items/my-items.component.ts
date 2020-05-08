@@ -12,6 +12,7 @@ export class MyItemsComponent implements OnInit, OnDestroy {
 
   popUpOpen: boolean = false;
   popUpItem: Item;
+  popUpIndex: number;
   private _subscription_userName: any;
   loggedUserName: string;
   items: Item[];
@@ -32,8 +33,14 @@ export class MyItemsComponent implements OnInit, OnDestroy {
   public theCallback(item: Item){
     this.popUpOpen = false;
     if (item != null) {
+      const id = this.popUpItem.id;
       this.itemService.updateItem(item)
-      .subscribe(item => this.popUpItem = item);
+      .subscribe(item => {
+        if (this.popUpIndex != null) {
+          this.items[this.popUpIndex] = item;
+        } else {
+          this.items.push(item);
+        }});
     }
   }
 
@@ -66,11 +73,21 @@ export class MyItemsComponent implements OnInit, OnDestroy {
       rented: false
     };
     this.popUpOpen = true;
+    this.popUpIndex = null;
   }
 
-  openEditItem(item: Item) : void {
-    this.popUpItem = item;
+  openEditItem(item: Item, index: number) : void {
+    this.popUpItem = {
+      id: item.id,
+      name: item.name,
+      category: item.category,
+      owner: this.loggedUserName,
+      description: item.description,
+      available: false,
+      rented: false
+    };
     this.popUpOpen = true;
+    this.popUpIndex = index;
   }
 
   ngOnDestroy(): void {
