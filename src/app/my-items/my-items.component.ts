@@ -77,17 +77,9 @@ export class MyItemsComponent implements OnInit, OnDestroy {
   }
 
   openEditItem(item: Item, index: number) : void {
-    this.popUpItem = {
-      id: item.id,
-      name: item.name,
-      category: item.category,
-      owner: this.loggedUserName,
-      description: item.description,
-      available: false,
-      rented: false
-    };
-    this.popUpOpen = true;
+    this.popUpItem = Object.assign({}, item);
     this.popUpIndex = index;
+    this.popUpOpen = true;
   }
 
   ngOnDestroy(): void {
