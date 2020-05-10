@@ -53,7 +53,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
       itemId: item.id,
       rentalDate: null,
       returnDate: null,
-      rentalPeriod: 3 };
+      rentalPeriod: item.rentalPeriod };
     this.rentalService.addRental(rental)
       .subscribe(rental => {console.log("Rental has been saved: " + rental.id)});
   }

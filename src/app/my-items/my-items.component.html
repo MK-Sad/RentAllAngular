@@ -11,10 +11,10 @@
     <div class="item-right">
         <div>
             <div *ngIf="item.rented">
-                <span>Item is rented  </span><button (click)="itemReturned(item)">Confirm Return</button>
+                <span>Item is rented for {{item.rentalPeriod}} days</span><button (click)="itemReturned(item)">Confirm Return</button>
             </div>
             <div *ngIf="!item.rented">
-                <span *ngIf="item.available">Item is ready to rent</span>
+                <span *ngIf="item.available">Item is ready to rent for {{item.rentalPeriod}} days</span>
                 <span *ngIf="!item.available">Item is not available</span>
             </div>     
         </div>

@@ -14,7 +14,7 @@
   </div>
 
   <div class="item-right">
-    <button (click)="rentIt($event, item)" *ngIf="!(item.owner==loggedUserName)">Rent {{ item.name }} for 3days</button>
+    <button (click)="rentIt($event, item)" *ngIf="!(item.owner==loggedUserName)">Rent {{ item.name }} for {{ item.rentalPeriod }} days</button>
   </div>
 
 </div>

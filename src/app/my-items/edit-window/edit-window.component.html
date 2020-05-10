@@ -12,6 +12,8 @@
       <select [(ngModel)]="popUpItem.category">
         <option *ngFor="let category of categories" [value]="category">{{category}}</option>
       </select>
+    <p>Rental Period:</p> 
+    <p><input type="number" min="1" [(ngModel)]="popUpItem.rentalPeriod"/>
     </p>
   </main>
   <footer>

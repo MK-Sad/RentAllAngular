@@ -67,6 +67,7 @@ export class MyItemsComponent implements OnInit, OnDestroy {
       id: null,
       name: null,
       category: null,
+      rentalPeriod: 1,
       owner: this.loggedUserName,
       description: null,
       available: false,
