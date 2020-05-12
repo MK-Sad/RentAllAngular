@@ -4,7 +4,7 @@ import { Rental } from '../rental';
 import { RentalView } from '../rentalView';
 import { ItemService } from '../item.service';
 import { RentalService } from '../rental.service';
-import { UserNameService } from '../userName.service';
+import { ShareService } from '../share.service';
 import { Observable } from 'rxjs';
 import { map, flatMap } from 'rxjs/operators';
 
@@ -16,14 +16,18 @@ import { map, flatMap } from 'rxjs/operators';
 export class RentalsComponent implements OnInit, OnDestroy {
 
   private _subscription_userName: any;
+  private _subscription_rentalAdded: any;
   loggedUserName: string;
   rentals: Rental[];
   currentDate:number = Number(new Date());
 
-  constructor(private itemService: ItemService, private rentalService: RentalService, private userNameService : UserNameService) {
-    this._subscription_userName = this.userNameService.execChange.subscribe((value) => {
+  constructor(private itemService: ItemService, private rentalService: RentalService, private shareService : ShareService) {
+    this._subscription_userName = this.shareService.userChange.subscribe((value) => {
         this.loggedUserName = value;
         this.getRentalsByUserName();
+    });
+    this._subscription_rentalAdded = this.shareService.rentalAdded.subscribe((value) => {
+      this.rentals.push(value);
     });
    }
 
@@ -54,6 +58,7 @@ export class RentalsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._subscription_userName.unsubscribe();
+    this._subscription_rentalAdded.unsubscribe();
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserNameService } from '../userName.service';
+import { ShareService } from '../share.service';
 
 @Component({
   selector: 'app-logging',
@@ -8,12 +8,12 @@ import { UserNameService } from '../userName.service';
 })
 export class LoggingComponent implements OnInit {
 
-  constructor(private userNameService: UserNameService) {}
+  constructor(private shareService: ShareService) {}
 
   loggedUserName: string;
 
   changeUserName(): void {
-    this.userNameService.userNameChange(this.loggedUserName);
+    this.shareService.userNameChange(this.loggedUserName);
   }
 
   ngOnInit(): void {

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Item } from '../item';
 import { ItemService } from '../item.service';
-import { UserNameService } from '../userName.service';
+import { ShareService } from '../share.service';
 
 @Component({
   selector: 'app-my-items',
@@ -19,8 +19,8 @@ export class MyItemsComponent implements OnInit, OnDestroy {
   theBoundCallback: Function;
 
 
-  constructor(private itemService: ItemService, private userNameService : UserNameService) {
-    this._subscription_userName = this.userNameService.execChange.subscribe((value) => {
+  constructor(private itemService: ItemService, private shareService : ShareService) {
+    this._subscription_userName = this.shareService.userChange.subscribe((value) => {
         this.loggedUserName = value;
         this.getItemsByOwnerName(this.loggedUserName);
     });

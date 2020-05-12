@@ -1,5 +1,5 @@
 .pop-up-box {
-    position: absolute;
+    position: fixed;
     z-index:10000;
     width: 30%;
     top: 50%;

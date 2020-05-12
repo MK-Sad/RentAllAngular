@@ -3,7 +3,7 @@ import { Item } from '../item';
 import { Rental } from '../rental';
 import { ItemService } from '../item.service';
 import { RentalService } from '../rental.service';
-import { UserNameService } from '../userName.service';
+import { ShareService } from '../share.service';
 
 @Component({
   selector: 'app-items',
@@ -19,8 +19,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
   category: string;
   selectedCategory: string;
 
-  constructor(private itemService: ItemService, private rentalService: RentalService, private userNameService : UserNameService) {
-    this._subscription_userName = this.userNameService.execChange.subscribe((value) => {
+  constructor(private itemService: ItemService, private rentalService: RentalService, private shareService : ShareService) {
+    this._subscription_userName = this.shareService.userChange.subscribe((value) => {
         this.loggedUserName = value;
         this.getItemsByCategory();
     });
@@ -46,7 +46,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.getItemsByCategory();
   }
 
-  rentIt(event, item: Item): void {
+  rentIt(item: Item): void {
     var rental: Rental = { 
       id: null,
       userName: this.loggedUserName,
@@ -55,7 +55,16 @@ export class ItemsComponent implements OnInit, OnDestroy {
       returnDate: null,
       rentalPeriod: item.rentalPeriod };
     this.rentalService.addRental(rental)
-      .subscribe(rental => {console.log("Rental has been saved: " + rental.id)});
+      .subscribe(rental => {
+        rental['item'] = item;
+        this.removeItem(item);
+        this.shareService.rentalAdd(rental);
+      });
+  }
+
+  removeItem(item){
+    const index: number = this.items.indexOf(item);
+    this.items.splice(index, 1);
   }
 
   ngOnDestroy(): void {

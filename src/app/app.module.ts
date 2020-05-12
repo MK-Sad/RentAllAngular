@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';  
-import { UserNameService } from './userName.service';
+import { ShareService } from './share.service';
 
 import { ItemsComponent }      from './items/items.component';
 import { RentalsComponent } from './rentals/rentals.component';
@@ -31,7 +31,7 @@ import { EditWindowComponent } from './my-items/edit-window/edit-window.componen
     HttpClientModule,
     FormsModule
   ],
-  providers: [UserNameService],
+  providers: [ShareService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
