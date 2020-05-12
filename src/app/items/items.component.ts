@@ -16,6 +16,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   loggedUserName: string;
   items: Item[];
   categories: string[];
+  namePart: string;
   category: string;
   selectedCategory: string;
 
@@ -46,6 +47,13 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.getItemsByCategory();
   }
 
+  searchByNamePart(): void {
+    if (this.namePart.length > 3) {
+      this.itemService.searchItemsByNamePart(this.namePart)
+      .subscribe(items => this.items = items);
+    }
+  }
+
   rentIt(item: Item): void {
     var rental: Rental = { 
       id: null,
@@ -62,7 +70,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
       });
   }
 
-  removeItem(item){
+  removeItem(item: Item){
     const index: number = this.items.indexOf(item);
     this.items.splice(index, 1);
   }

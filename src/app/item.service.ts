@@ -79,6 +79,19 @@ export class ItemService {
     );
   }
 
+  searchItemsByNamePart(namePart: string): Observable<Item[]> {
+    if (!namePart.trim()) {
+      // if not search term, return empty hero array.
+      return of([]);
+    }
+    return this.http.get<Item[]>(`${this.url}/item/namePart/${namePart}`).pipe(
+      tap(x => x.length ?
+         this.log(`found items matching "${namePart}"`) :
+         this.log(`no items matching "${namePart}"`)),
+      catchError(this.handleError<Item[]>('searchItemsByNamePart', []))
+    );
+  }
+
   //////// Save methods //////////
 
   addItem(item: Item): Observable<Item> {
