@@ -25,7 +25,7 @@ export class ItemService {
   getCategories(): Observable<string[]> {
     const url = `${this.url}/categories`;
     return this.http.get<string[]>(url).pipe(
-      tap(_ => this.log(`fetched categories`)),
+      tap(_ => console.log(`fetched categories`)),
       catchError(this.handleError<string[]>(`getCategories`))
     );
   }
@@ -38,7 +38,7 @@ export class ItemService {
         map(items => items[0]), // returns a {0|1} element array
         tap(h => {
           const outcome = h ? `fetched` : `did not find`;
-          this.log(`${outcome} item id=${id}`);
+          console.log(`${outcome} item id=${id}`);
         }),
         catchError(this.handleError<Item>(`getItem id=${id}`))
       );
@@ -48,7 +48,7 @@ export class ItemService {
   getItem(id: number): Observable<Item> {
     const url = `${this.url}/item/${id}`;
     return this.http.get<Item>(url).pipe(
-      tap(_ => this.log(`fetched item id=${id}`)),
+      tap(_ => console.log(`fetched item id=${id}`)),
       catchError(this.handleError<Item>(`getItem id=${id}`))
     );
   }
@@ -60,8 +60,8 @@ export class ItemService {
     }
     return this.http.get<Item[]>(`${this.url}/item/category/${category}`).pipe(
       tap(x => x.length ?
-         this.log(`found items matching "${category}"`) :
-         this.log(`no items matching "${category}"`)),
+         console.log(`found items matching "${category}"`) :
+         console.log(`no items matching "${category}"`)),
       catchError(this.handleError<Item[]>('searchItemsByCategory', []))
     );
   }
@@ -73,8 +73,8 @@ export class ItemService {
     }
     return this.http.get<Item[]>(`${this.url}/item/owner/${ownerName}`).pipe(
       tap(x => x.length ?
-         this.log(`found items matching "${ownerName}"`) :
-         this.log(`no items matching "${ownerName}"`)),
+         console.log(`found items matching "${ownerName}"`) :
+         console.log(`no items matching "${ownerName}"`)),
       catchError(this.handleError<Item[]>('searchItemsByOwner', []))
     );
   }
@@ -86,8 +86,8 @@ export class ItemService {
     }
     return this.http.get<Item[]>(`${this.url}/item/namePart/${namePart}`).pipe(
       tap(x => x.length ?
-         this.log(`found items matching "${namePart}"`) :
-         this.log(`no items matching "${namePart}"`)),
+         console.log(`found items matching "${namePart}"`) :
+         console.log(`no items matching "${namePart}"`)),
       catchError(this.handleError<Item[]>('searchItemsByNamePart', []))
     );
   }
@@ -96,7 +96,7 @@ export class ItemService {
 
   addItem(item: Item): Observable<Item> {
     return this.http.post<Item>(this.url, item, this.httpOptions).pipe(
-      tap((newItem:Item) => this.log(`added item w/ id=${newItem.id}`)),
+      tap((newItem:Item) => console.log(`added item w/ id=${newItem.id}`)),
       catchError(this.handleError<Item>('addItem'))
     );
   }
@@ -106,7 +106,7 @@ export class ItemService {
     const url = `${this.url}/${id}`;
 
     return this.http.delete<Item>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted item id=${id}`)),
+      tap(_ => console.log(`deleted item id=${id}`)),
       catchError(this.handleError<Item>('deleteItem'))
     );
   }
@@ -114,7 +114,7 @@ export class ItemService {
   updateItem(item: Item): Observable<any> {
     const url = `${this.url}/item`; ///${item.id}
     return this.http.put(url, item, this.httpOptions).pipe(
-      tap(_ => this.log(`updated item id=${item.id}`)),
+      tap(_ => console.log(`updated item id=${item.id}`)),
       catchError(this.handleError<any>('updateItem'))
     );
   }
@@ -122,7 +122,7 @@ export class ItemService {
   returnItem(itemId: number): Observable<any> {
     const url = `${this.url}/returnItem/${itemId}`;
     return this.http.put(url, this.httpOptions).pipe(
-      tap(_ => this.log(`returned item id=${itemId}`)),
+      tap(_ => console.log(`returned item id=${itemId}`)),
       catchError(this.handleError<any>('returnItem'))
     );
   }

@@ -17,7 +17,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
   items: Item[];
   categories: string[];
   namePart: string;
-  category: string;
   selectedCategory: string;
 
   constructor(private itemService: ItemService, private rentalService: RentalService, private shareService : ShareService) {
@@ -48,7 +47,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   searchByNamePart(): void {
-    if (this.namePart.length > 3) {
+    if (this.namePart.length > 2) {
+      this.selectedCategory = null;
       this.itemService.searchItemsByNamePart(this.namePart)
       .subscribe(items => this.items = items);
     }

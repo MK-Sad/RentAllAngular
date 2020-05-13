@@ -15,7 +15,9 @@
   </div>
 
   <div class="item-right">
-    <button (click)="rentIt(item)" *ngIf="!(item.owner==loggedUserName)">Rent {{ item.name }} for {{ item.rentalPeriod }} days</button>
+    <button (click)="rentIt(item)" *ngIf="!(item.owner==loggedUserName)">
+      Rent {{ item.name }} for {{ item.rentalPeriod }} days</button>
+    <div *ngIf="!(selectedCategory)"><span>category: </span>{{item.category}}</div>
   </div>
 
 </div>

@@ -27,15 +27,15 @@ export class RentalService {
     }
     return this.http.get<Rental[]>(`${this.url}/rentalsByUser/${userName}`).pipe(
       tap(x => x.length ?
-         this.log(`found items matching "${userName}"`) :
-         this.log(`no items matching "${userName}"`)),
+         console.log(`found items matching "${userName}"`) :
+         console.log(`no items matching "${userName}"`)),
       catchError(this.handleError<Rental[]>('searchRentalsByUserName', []))
     );
   }
 
   addRental(newRental: Rental): Observable<Rental> {
     return this.http.post<Rental>(`${this.url}/rentItem`, newRental, this.httpOptions).pipe(
-      tap((newRental:Rental) => this.log(`added rental w/ id=${newRental.id}`)),
+      tap((newRental:Rental) => console.log(`added rental w/ id=${newRental.id}`)),
       catchError(this.handleError<Rental>('addRental'))
     );
   }
