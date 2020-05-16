@@ -1,8 +1,10 @@
 <h2>
-  ITEMS FOR RENT - Select category: 
+  ITEMS FOR RENT <br>
+  Search by category:
   <select [(ngModel)]="selectedCategory" (change)="changeCategory()">
     <option *ngFor="let category of categories" [value]="category">{{category}}</option>
-  </select>
+  </select><br>
+  Search by name:
   <input type="text" [(ngModel)]="namePart" (keyup)="searchByNamePart()"/>
 </h2>
 
