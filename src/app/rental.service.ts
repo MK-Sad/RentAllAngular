@@ -52,8 +52,16 @@ export class RentalService {
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
+      switch(error.error.status) { 
+        case 404: {
+          this.log(`The object is not available`); 
+          break; 
+        } 
+        default: {
+          this.log(`${operation} failed: ${error.message}`);
+          break; 
+        } 
+     } 
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
@@ -62,6 +70,6 @@ export class RentalService {
 
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
-    this.messageService.add(`ItemService: ${message}`);
+    this.messageService.add(`${message}`);
   }
 }
