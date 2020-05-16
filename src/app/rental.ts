@@ -1,3 +1,5 @@
+import { Item } from './item';
+
 export interface Rental {
     id: number;
     userName: string;
@@ -5,6 +7,7 @@ export interface Rental {
     rentalDate: string;
     returnDate: string;
     rentalPeriod: number;
+    item?: Item;
   }
 
   

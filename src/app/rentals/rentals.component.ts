@@ -1,12 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Item } from '../item';
 import { Rental } from '../rental';
-import { RentalView } from '../rentalView';
 import { ItemService } from '../item.service';
 import { RentalService } from '../rental.service';
 import { ShareService } from '../share.service';
-import { Observable } from 'rxjs';
-import { map, flatMap } from 'rxjs/operators';
+import { Observable, forkJoin } from 'rxjs';
+
+type MapOfItems = {
+  [x: number]: Item;
+}
 
 @Component({
   selector: 'app-rentals',
@@ -18,18 +20,18 @@ export class RentalsComponent implements OnInit, OnDestroy {
   private _subscription_userName: any;
   private _subscription_rentalAdded: any;
   loggedUserName: string;
-  rentals: Rental[];
-  currentDate:number = Number(new Date());
+  rentals: Rental[] = [];
+  currentDate: number = Date.now();
 
-  constructor(private itemService: ItemService, private rentalService: RentalService, private shareService : ShareService) {
+  constructor(private itemService: ItemService, private rentalService: RentalService, private shareService: ShareService) {
     this._subscription_userName = this.shareService.userChange.subscribe((value) => {
-        this.loggedUserName = value;
-        this.getRentalsByUserName();
+      this.loggedUserName = value;
+      this.getRentalsByUserName();
     });
     this._subscription_rentalAdded = this.shareService.rentalAdded.subscribe((value) => {
       this.rentals.push(value);
     });
-   }
+  }
 
   ngOnInit(): void {
   }
@@ -37,23 +39,34 @@ export class RentalsComponent implements OnInit, OnDestroy {
   getRentalsByUserName(): void {
     this.rentalService.searchRentalsByUserName(this.loggedUserName)
       .subscribe(rentals => {
-        rentals.map(rental => {
-          this.getItemByRental(rental)
+        const result = this.callForItems(rentals);
+        forkJoin(result).subscribe(items => {
+          const mapOfItems = this.mapOfItems(items);
+          rentals.map(rental => {
+            const item = mapOfItems[rental.itemId];
+            if (item) {
+              rental.item = item;
+            }
+          })
+          this.rentals = rentals;
         });
-        this.rentals = rentals;
       }
       );
   }
 
-  getItemByRental(rental: Rental): void {
-    this.itemService.getItem(rental.itemId)
-      .subscribe(item => 
-        rental['item'] = item
-      );
+  private mapOfItems(items: Item[]): MapOfItems {
+    return items.reduce((map: MapOfItems, item) => {
+      map[item.id] = item;
+      return map;
+    }, {});
+  }
+
+  private callForItems(rentals: Rental[]): Observable<Item>[] {
+    return rentals.map(rental => this.itemService.getItem(rental.itemId));
   }
 
   diff(rentalDate: string, rentalPeriod: number): number {
-    return rentalPeriod - Math.floor((this.currentDate - Date.parse(rentalDate) ) / 86400000); 
+    return rentalPeriod - Math.floor((this.currentDate - Date.parse(rentalDate)) / 86400000);
   }
 
   ngOnDestroy(): void {
