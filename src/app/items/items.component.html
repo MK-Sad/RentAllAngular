@@ -1,10 +1,10 @@
 <h2>
-  ITEMS FOR RENT <br>
-  Search by category:
+  Poszukuję... <br><br>
+  według kategorii:
   <select [(ngModel)]="selectedCategory" (change)="changeCategory()">
     <option *ngFor="let category of categories" [value]="category">{{category}}</option>
   </select><br>
-  Search by name:
+  według nazwy:
   <input type="text" [(ngModel)]="namePart" (keyup)="searchByNamePart()"/>
 </h2>
 
@@ -25,5 +25,5 @@
 </div>
 
 <div *ngIf="items == undefined || items.length == 0" class="item center">
-  <h2>No items found</h2>
+  <h2>Niestety, nie znaleziono :(</h2>
 </div>
