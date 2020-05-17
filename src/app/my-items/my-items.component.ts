@@ -21,13 +21,21 @@ export class MyItemsComponent implements OnInit, OnDestroy {
 
   constructor(private itemService: ItemService, private shareService : ShareService) {
     this._subscription_userName = this.shareService.userChange.subscribe((value) => {
-        this.loggedUserName = value;
-        this.getItemsByOwnerName(this.loggedUserName);
+        this.onUserNameChange(value);
     });
    }
 
   ngOnInit(): void {
     this.theBoundCallback = this.theCallback.bind(this);
+  }
+
+  onUserNameChange(newUserName: string) : void {
+    this.loggedUserName = newUserName;
+    if (newUserName != null) {
+      this.getItemsByOwnerName(this.loggedUserName);
+    } else {
+      this.items = [];
+    }
   }
 
   public theCallback(item: Item){

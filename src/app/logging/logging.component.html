@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <select [(ngModel)]="loggedUserName" (change)="changeUserName()">
     <option value = "Robert">Robert</option>
     <option value = "Monika">Monika</option>
@@ -6,3 +7,36 @@
 </select>
 Logged as: {{loggedUserName}}
 <button (click)="changeUserName()">Reload</button>
+=======
+<div class="welcome" *ngIf="!loggedUserName" [style.background]="'url(' + background_graty + ')'">
+<div class="pop-up-box" >
+    <h2>
+        <img [src]="logo" />
+      <span class="title">Zaloguj się</span>
+    </h2>
+    <form #formData="ngForm" (ngSubmit)="login(formData)">
+    <main>
+      <p>Nazwa użytkownika:</p> 
+      <p><input ngModel name="name" required></p>
+      <p>Hasło:</p> 
+      <p><input ngModel type="password" name="password" required></p>
+    </main>
+    <footer>
+        <button type="submit" [disabled]="formData.invalid">Zaloguj</button>
+      <button>Zarejestruj się</button>
+    </footer>
+</form>
+</div>
+</div>
+
+Logged as: {{loggedUserName}}
+<button (click)="changeUserName()">Reload</button> 
+<button (click)="logout()">Logout</button>
+
+
+<!-- 
+<div  *ngIf="!loggedUserName">
+    <img [src]="background" />
+</div>
+-->
+>>>>>>> d1dbe1f0fc03e37144afb8764615c945023ff2a1

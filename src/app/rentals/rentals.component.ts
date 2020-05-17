@@ -19,12 +19,11 @@ export class RentalsComponent implements OnInit, OnDestroy {
   private _subscription_rentalAdded: any;
   loggedUserName: string;
   rentals: Rental[];
-  currentDate:number = Number(new Date());
+  currentDate:number = Number(new Date().setHours(0,0,0,0));
 
   constructor(private itemService: ItemService, private rentalService: RentalService, private shareService : ShareService) {
     this._subscription_userName = this.shareService.userChange.subscribe((value) => {
-        this.loggedUserName = value;
-        this.getRentalsByUserName();
+      this.onUserNameChange(value);
     });
     this._subscription_rentalAdded = this.shareService.rentalAdded.subscribe((value) => {
       this.rentals.push(value);
@@ -32,6 +31,15 @@ export class RentalsComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit(): void {
+  }
+
+  onUserNameChange(newUserName: string) : void {
+    this.loggedUserName = newUserName;
+    if (newUserName != null) {
+      this.getRentalsByUserName();
+    } else {
+      this.rentals = [];
+    }
   }
 
   getRentalsByUserName(): void {
@@ -53,7 +61,8 @@ export class RentalsComponent implements OnInit, OnDestroy {
   }
 
   diff(rentalDate: string, rentalPeriod: number): number {
-    return rentalPeriod - Math.floor((this.currentDate - Date.parse(rentalDate) ) / 86400000); 
+    var parsedRentalDate = new Date(Date.parse(rentalDate)).setHours(0,0,0,0);
+    return rentalPeriod - Math.floor((this.currentDate - parsedRentalDate) / 86400000); 
   }
 
   ngOnDestroy(): void {

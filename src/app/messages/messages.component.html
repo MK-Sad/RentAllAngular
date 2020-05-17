@@ -1,13 +1,9 @@
 <div class="pop-up" *ngIf="messageService.messages.length">
     <div class="pop-up-box">
-
-    <h2>Message</h2>
-    <div *ngFor='let message of messageService.messages'> {{message}} </div>
-
-    <footer>
-    <button class="clear"
-            (click)="messageService.clear()">OK</button>
+        <h2>Message</h2>
+        <div *ngFor='let message of messageService.messages'> {{message}} </div>
+        <footer>
+            <button class="clear" (click)="messageService.clear()">OK</button>
         </footer>
-
     </div>
 </div>

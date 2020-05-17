@@ -1,14 +1,22 @@
 <h2>
+
   Poszukuję... <br><br>
   według kategorii:
   <select [(ngModel)]="selectedCategory" (change)="changeCategory()">
     <option *ngFor="let category of categories" [value]="category">{{category}}</option>
   </select><br>
   według nazwy:
+
   <input type="text" [(ngModel)]="namePart" (keyup)="searchByNamePart()"/>
 </h2>
 
 <div class="item" *ngFor="let item of items">
+
+  <div class="item-left">
+    <div class = "img_frame">
+      <img [src]="(shareService.homeUrl + image)"/>
+    </div>
+  </div>
 
   <div class="item-left">
     <h2>{{item.name}}</h2>

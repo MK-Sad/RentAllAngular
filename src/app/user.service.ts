@@ -4,12 +4,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Rental } from './rental';
+import { UserCredentials } from './userCredentials';
 import { MessageService } from './message.service';
 
 
 @Injectable({ providedIn: 'root' })
-export class RentalService {
+export class UserService {
 
   private url = 'http://localhost:8080';  // URL to web api
 
@@ -20,26 +20,30 @@ export class RentalService {
   constructor(
     private http: HttpClient,
     private messageService: MessageService) { }
-
-  searchRentalsByUserName(userName: string): Observable<Rental[]> {
-    if (!userName.trim()) {
-      return of([]);
-    }
-    return this.http.get<Rental[]>(`${this.url}/rentalsByUser/${userName}`).pipe(
-      tap(x => x.length ?
-         console.log(`found items matching "${userName}"`) :
-         console.log(`no items matching "${userName}"`)),
-      catchError(this.handleError<Rental[]>('searchRentalsByUserName', []))
+    
+  authenticate(userCredentials: UserCredentials): Observable<UserCredentials> {
+    const url = `${this.url}/authenticate`;
+    return this.http.post<UserCredentials>(url, userCredentials, this.httpOptions).pipe(
+      catchError(this.handleError<UserCredentials>('authentication'))
+    );
+  }
+/*
+  addItem(item: Item): Observable<Item> {
+    const url = `${this.url}/item`; ///${item.id}
+    return this.http.post<Item>(this.url, item, this.httpOptions).pipe(
+      tap((newItem:Item) => console.log(`added item w/ id=${newItem.id}`)),
+      catchError(this.handleError<Item>('addItem'))
     );
   }
 
-  addRental(newRental: Rental): Observable<Rental> {
-    return this.http.post<Rental>(`${this.url}/rentItem`, newRental, this.httpOptions).pipe(
-      tap((newRental:Rental) => console.log(`added rental w/ id=${newRental.id}`)),
-      catchError(this.handleError<Rental>('addRental'))
+  updateItem(item: Item): Observable<any> {
+    const url = `${this.url}/item`; ///${item.id}
+    return this.http.put(url, item, this.httpOptions).pipe(
+      tap(_ => console.log(`updated item id=${item.id}`)),
+      catchError(this.handleError<any>('updateItem'))
     );
   }
-
+  */
   /**
    * Handle Http operation that failed.
    * Let the app continue.
@@ -53,16 +57,15 @@ export class RentalService {
       console.error(error); // log to console instead
 
       switch(error.error.status) { 
-        case 404: {
-          this.log(`The object is not available`); 
+        case 401: {
+          this.log(`Niepoprawne dane logowania.`); 
           break; 
         } 
         default: {
           this.log(`${operation} failed: ${error.message}`);
           break; 
         } 
-     } 
-
+    }
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
@@ -70,6 +73,6 @@ export class RentalService {
 
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
-    this.messageService.add(`${message}`);
+    this.messageService.add(`Błąd ${message}`);
   }
 }
