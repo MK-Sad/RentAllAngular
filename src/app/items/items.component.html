@@ -11,6 +11,12 @@
 <div class="item" *ngFor="let item of items">
 
   <div class="item-left">
+    <div class = "img_frame">
+      <img [src]="(shareService.homeUrl + image)"/>
+    </div>
+  </div>
+
+  <div class="item-left">
     <h2>{{item.name}}</h2>
     <div><span>owner: </span>{{item.owner}}</div>
     <div><span>description: </span>{{item.description}}</div>

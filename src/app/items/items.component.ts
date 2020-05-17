@@ -18,8 +18,9 @@ export class ItemsComponent implements OnInit, OnDestroy {
   categories: string[];
   namePart: string;
   selectedCategory: string;
+  image: string = '/images/lego.jpg'
 
-  constructor(private itemService: ItemService, private rentalService: RentalService, private shareService : ShareService) {
+  constructor(private itemService: ItemService, private rentalService: RentalService, public shareService : ShareService) {
     this._subscription_userName = this.shareService.userChange.subscribe((value) => {
         this.loggedUserName = value;
         this.getItemsByCategory();

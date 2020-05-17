@@ -23,8 +23,7 @@ export class RentalsComponent implements OnInit, OnDestroy {
 
   constructor(private itemService: ItemService, private rentalService: RentalService, private shareService : ShareService) {
     this._subscription_userName = this.shareService.userChange.subscribe((value) => {
-        this.loggedUserName = value;
-        this.getRentalsByUserName();
+      this.onUserNameChange(value);
     });
     this._subscription_rentalAdded = this.shareService.rentalAdded.subscribe((value) => {
       this.rentals.push(value);
@@ -32,6 +31,15 @@ export class RentalsComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit(): void {
+  }
+
+  onUserNameChange(newUserName: string) : void {
+    this.loggedUserName = newUserName;
+    if (newUserName != null) {
+      this.getRentalsByUserName();
+    } else {
+      this.rentals = [];
+    }
   }
 
   getRentalsByUserName(): void {

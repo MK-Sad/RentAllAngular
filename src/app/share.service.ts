@@ -5,6 +5,8 @@ import { Rental } from './rental';
 @Injectable()
 export class ShareService {
 
+    homeUrl = 'http://localhost:8080';
+
     userChange: Subject<any> = new Subject<any>();
     rentalAdded: Subject<any> = new Subject<any>();
 
