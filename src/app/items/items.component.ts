@@ -22,10 +22,19 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
   constructor(private itemService: ItemService, private rentalService: RentalService, public shareService : ShareService) {
     this._subscription_userName = this.shareService.userChange.subscribe((value) => {
-        this.loggedUserName = value;
-        this.getItemsByCategory();
+      this.onUserNameChange(value);
     });
    }
+
+  onUserNameChange(newUserName: string) : void {
+    this.loggedUserName = newUserName;
+    if (newUserName != null) {
+      this.selectedCategory = "TOOLS";
+      this.getItemsByCategory();
+    } else {
+      this.items = [];
+    }
+  } 
 
   ngOnInit(): void {
     this.getCategories();
