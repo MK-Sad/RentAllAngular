@@ -10,7 +10,17 @@
   <input type="text" [(ngModel)]="namePart" (keyup)="searchByNamePart()"/>
 </h2>
 
+<div *ngIf="items == undefined || items.length == 0" class="item center">
+  <h2>Niestety, nie znaleziono :(</h2>
+</div>
+
 <div class="item" *ngFor="let item of items">
+
+  <div class="item-right">
+    <button (click)="rentIt(item)" *ngIf="!(item.owner==loggedUserName)">
+      Rent {{ item.name }} for {{ item.rentalPeriod }} days</button>
+    <div *ngIf="!(selectedCategory)"><span>category: </span>{{item.category}}</div>
+  </div>
 
   <div class="item-left">
     <div class = "img_frame">
@@ -24,14 +34,7 @@
     <div><span>description: </span>{{item.description}}</div>
   </div>
 
-  <div class="item-right">
-    <button (click)="rentIt(item)" *ngIf="!(item.owner==loggedUserName)">
-      Rent {{ item.name }} for {{ item.rentalPeriod }} days</button>
-    <div *ngIf="!(selectedCategory)"><span>category: </span>{{item.category}}</div>
-  </div>
 
 </div>
 
-<div *ngIf="items == undefined || items.length == 0" class="item center">
-  <h2>Niestety, nie znaleziono :(</h2>
-</div>
+

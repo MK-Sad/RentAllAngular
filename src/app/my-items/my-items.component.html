@@ -1,5 +1,11 @@
 <h2>Mogę pożyczyć:</h2>
 
+<a *ngIf="loggedUserName != undefined" class="clickable" (click)="openAddItem()">
+  <div class="item center">
+      <h2>Dodaj nowy przedmiot</h2>
+  </div>
+</a>
+
 <div class="item" *ngFor="let item of items; index as i">
 
     <div class="item-left">
@@ -21,7 +27,7 @@
         <div>
             <input type="checkbox" [(ngModel)]="item.available"
                 (change)="changeAvailable(item)" [disabled]="item.rented" id="available" />
-            <label for="available">gotowy do wypożyczenia</label>
+            <label for="available">udostępnij</label>
         </div>
         <div>
             <button (click)="openEditItem(item, i)">Edytuj</button>
@@ -35,9 +41,9 @@
 </div>
 
 <a *ngIf="loggedUserName != undefined" class="clickable" (click)="openAddItem()">
-    <div class="item center">
-        <h2>Dodaj nowy przedmiot</h2>
-    </div>
+  <div class="item center">
+      <h2>Dodaj nowy przedmiot</h2>
+  </div>
 </a>
 
 <app-edit-window [popUpOpen]="popUpOpen" [popUpItem]="popUpItem" [myCallback]="theBoundCallback">
