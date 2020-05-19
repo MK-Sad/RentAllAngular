@@ -68,8 +68,10 @@ export class ItemsComponent implements OnInit, OnDestroy {
     var rental: Rental = { 
       id: null,
       userName: this.loggedUserName,
+      ownerName: null,
       itemId: item.id,
       rentalDate: null,
+      confirmedDate: null,
       returnDate: null,
       rentalPeriod: item.rentalPeriod };
     this.rentalService.addRental(rental)

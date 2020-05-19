@@ -14,6 +14,7 @@ export class LoggingComponent implements OnInit {
   constructor(private userService: UserService, private shareService: ShareService) {}
 
   loggedUserName: string;
+  userPoints: number;
   userCredentials: UserCredentials;
   background_graty: string = this.shareService.homeUrl + '/images/graty.jpg';
   logo: string = this.shareService.homeUrl + '/images/logo.png';
@@ -34,8 +35,9 @@ export class LoggingComponent implements OnInit {
     const userCredentials: UserCredentials = { "name": formData.value.name, "password": formData.value.password };
     this.userService
       .authenticate(userCredentials)
-      .subscribe(userCredentialLogged => {
-        this.loggedUserName = userCredentialLogged.name;
+      .subscribe(userPoints => {
+        this.loggedUserName = userPoints.name;
+        this.userPoints = userPoints.points;
         this.changeUserName();
       });
   }
