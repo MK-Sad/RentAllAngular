@@ -3,7 +3,7 @@ import { Item } from '../item';
 import { Rental } from '../rental';
 import { ItemService } from '../item.service';
 import { RentalService } from '../rental.service';
-import { UserNameService } from '../userName.service';
+import { ShareService } from '../share.service';
 
 @Component({
   selector: 'app-items',
@@ -16,15 +16,24 @@ export class ItemsComponent implements OnInit, OnDestroy {
   loggedUserName: string;
   items: Item[];
   categories: string[];
-  category: string;
+  namePart: string;
   selectedCategory: string;
 
-  constructor(private itemService: ItemService, private rentalService: RentalService, private userNameService : UserNameService) {
-    this._subscription_userName = this.userNameService.execChange.subscribe((value) => {
-        this.loggedUserName = value;
-        this.getItemsByCategory();
+  constructor(private itemService: ItemService, private rentalService: RentalService, public shareService : ShareService) {
+    this._subscription_userName = this.shareService.userChange.subscribe((value) => {
+      this.onUserNameChange(value);
     });
    }
+
+  onUserNameChange(newUserName: string) : void {
+    this.loggedUserName = newUserName;
+    if (newUserName != null) {
+      this.selectedCategory = "TOOLS";
+      this.getItemsByCategory();
+    } else {
+      this.items = [];
+    }
+  } 
 
   ngOnInit(): void {
     this.getCategories();
@@ -46,16 +55,36 @@ export class ItemsComponent implements OnInit, OnDestroy {
     this.getItemsByCategory();
   }
 
-  rentIt(event, item: Item): void {
+  searchByNamePart(): void {
+    if (this.namePart.length > 2) {
+      this.selectedCategory = null;
+      this.itemService.searchItemsByNamePart(this.namePart)
+      .subscribe(items => this.items = items);
+    }
+  }
+
+  rentIt(item: Item): void {
     var rental: Rental = { 
       id: null,
       userName: this.loggedUserName,
+      ownerName: item.owner,
       itemId: item.id,
+      itemName: item.name,
       rentalDate: null,
+      confirmedDate: null,
       returnDate: null,
-      rentalPeriod: 3 };
+      rentalPeriod: item.rentalPeriod };
     this.rentalService.addRental(rental)
-      .subscribe(rental => {console.log("Rental has been saved: " + rental.id)});
+      .subscribe(rental => {
+        rental['item'] = item;
+        this.removeItem(item);
+        this.shareService.rentalAdd(rental);
+      });
+  }
+
+  removeItem(item: Item){
+    const index: number = this.items.indexOf(item);
+    this.items.splice(index, 1);
   }
 
   ngOnDestroy(): void {

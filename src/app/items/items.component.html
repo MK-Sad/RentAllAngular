@@ -1,11 +1,20 @@
 <h2>
-  ITEMS FOR RENT - Select category: 
+  ITEMS FOR RENT <br>
+  Search by category:
   <select [(ngModel)]="selectedCategory" (change)="changeCategory()">
     <option *ngFor="let category of categories" [value]="category">{{category}}</option>
-  </select>
+  </select><br>
+  Search by name:
+  <input type="text" [(ngModel)]="namePart" (keyup)="searchByNamePart()"/>
 </h2>
 
 <div class="item" *ngFor="let item of items">
+
+  <div class="item-left">
+    <div class = "img_frame">
+      <img *ngIf="item.imageName" [src]="(shareService.homeUrl + '/images/' + item.imageName)"/>
+    </div>
+  </div>
 
   <div class="item-left">
     <h2>{{item.name}}</h2>
@@ -14,7 +23,9 @@
   </div>
 
   <div class="item-right">
-    <button (click)="rentIt($event, item)" *ngIf="!(item.owner==loggedUserName)">Rent {{ item.name }} for 3days</button>
+    <button (click)="rentIt(item)" *ngIf="!(item.owner==loggedUserName)">
+      Rent {{ item.name }} for {{ item.rentalPeriod }} days</button>
+    <div *ngIf="!(selectedCategory)"><span>category: </span>{{item.category}}</div>
   </div>
 
 </div>
