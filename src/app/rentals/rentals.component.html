@@ -1,12 +1,12 @@
-<h2>My rentals</h2>
+<h2>Pożyczone przeze mnie:</h2>
 
 <div class="item" *ngFor="let rental of rentals"
 [style.background]="diff(rental.confirmedDate, rental.rentalPeriod) < 1 ? 'rgb(255, 70, 70, 0.1)' : null">
 
   <div class="item-left">
     <h2>{{rental.item.name}}</h2>
-    <div><span>category: </span>{{rental.item.category}}</div>
-    <div><span>description: </span>{{rental.item.description}}</div>
+    <div><span>kategoria: </span>{{rental.item.category}}</div>
+    <div><span>opis: </span>{{rental.item.description}}</div>
   </div>
 
   <div class="item-right">
@@ -20,5 +20,5 @@
 </div>
 
 <div *ngIf="rentals == undefined || rentals.length == 0" class="item center">
-  <h2>No rentals found</h2>
+  <h2>Pusto!</h2>
 </div>
