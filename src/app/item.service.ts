@@ -149,6 +149,6 @@ export class ItemService {
 
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
-    this.messageService.add(`ItemService: ${message}`);
+    this.messageService.add(`Błąd: ${message}`);
   }
 }

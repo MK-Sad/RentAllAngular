@@ -19,12 +19,21 @@ export class ItemsComponent implements OnInit, OnDestroy {
   namePart: string;
   selectedCategory: string;
 
-  constructor(private itemService: ItemService, private rentalService: RentalService, private shareService : ShareService) {
+  constructor(private itemService: ItemService, private rentalService: RentalService, public shareService : ShareService) {
     this._subscription_userName = this.shareService.userChange.subscribe((value) => {
-        this.loggedUserName = value;
-        this.getItemsByCategory();
+      this.onUserNameChange(value);
     });
    }
+
+  onUserNameChange(newUserName: string) : void {
+    this.loggedUserName = newUserName;
+    if (newUserName != null) {
+      this.selectedCategory = "TOOLS";
+      this.getItemsByCategory();
+    } else {
+      this.items = [];
+    }
+  } 
 
   ngOnInit(): void {
     this.getCategories();
@@ -58,8 +67,11 @@ export class ItemsComponent implements OnInit, OnDestroy {
     var rental: Rental = { 
       id: null,
       userName: this.loggedUserName,
+      ownerName: item.owner,
       itemId: item.id,
+      itemName: item.name,
       rentalDate: null,
+      confirmedDate: null,
       returnDate: null,
       rentalPeriod: item.rentalPeriod };
     this.rentalService.addRental(rental)
