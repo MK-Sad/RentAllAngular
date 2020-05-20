@@ -20,10 +20,9 @@
 </div>
 </div>
 
-Logged as: {{loggedUserName}}
-<button (click)="changeUserName()">Reload</button>
+Logged as: {{loggedUserName}}, points: {{userPoints}}
+<button (click)="changeUserName()">Reload</button> 
 <button (click)="logout()">Logout</button>
-
 
 <!--
 <div  *ngIf="!loggedUserName">

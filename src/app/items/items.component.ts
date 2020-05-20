@@ -18,14 +18,22 @@ export class ItemsComponent implements OnInit, OnDestroy {
   categories: string[];
   namePart: string;
   selectedCategory: string;
-  image: string = '/images/lego.jpg'
 
   constructor(private itemService: ItemService, private rentalService: RentalService, public shareService : ShareService) {
     this._subscription_userName = this.shareService.userChange.subscribe((value) => {
-        this.loggedUserName = value;
-        this.getItemsByCategory();
+      this.onUserNameChange(value);
     });
    }
+
+  onUserNameChange(newUserName: string) : void {
+    this.loggedUserName = newUserName;
+    if (newUserName != null) {
+      this.selectedCategory = "TOOLS";
+      this.getItemsByCategory();
+    } else {
+      this.items = [];
+    }
+  } 
 
   ngOnInit(): void {
     this.getCategories();
@@ -59,8 +67,11 @@ export class ItemsComponent implements OnInit, OnDestroy {
     var rental: Rental = { 
       id: null,
       userName: this.loggedUserName,
+      ownerName: item.owner,
       itemId: item.id,
+      itemName: item.name,
       rentalDate: null,
+      confirmedDate: null,
       returnDate: null,
       rentalPeriod: item.rentalPeriod };
     this.rentalService.addRental(rental)
