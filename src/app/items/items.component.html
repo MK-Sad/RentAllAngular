@@ -12,7 +12,7 @@
 
   <div class="item-left">
     <div class = "img_frame">
-      <img [src]="(shareService.homeUrl + image)"/>
+      <img *ngIf="item.imageName" [src]="(shareService.homeUrl + '/images/' + item.imageName)"/>
     </div>
   </div>
 

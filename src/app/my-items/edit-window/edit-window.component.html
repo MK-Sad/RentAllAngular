@@ -8,6 +8,8 @@
     <p><input type="text" [(ngModel)]="popUpItem.name"/></p>
     <p>Description:</p> 
     <p><input type="text" [(ngModel)]="popUpItem.description"/></p>
+    <p>Image filename:</p> 
+    <p><input type="text" [(ngModel)]="popUpItem.imageName"/></p>
     <p>Category:
       <select [(ngModel)]="popUpItem.category">
         <option *ngFor="let category of categories" [value]="category">{{category}}</option>

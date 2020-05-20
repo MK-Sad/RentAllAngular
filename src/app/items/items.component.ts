@@ -18,7 +18,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
   categories: string[];
   namePart: string;
   selectedCategory: string;
-  image: string = '/images/lego.jpg'
 
   constructor(private itemService: ItemService, private rentalService: RentalService, public shareService : ShareService) {
     this._subscription_userName = this.shareService.userChange.subscribe((value) => {
@@ -68,8 +67,9 @@ export class ItemsComponent implements OnInit, OnDestroy {
     var rental: Rental = { 
       id: null,
       userName: this.loggedUserName,
-      ownerName: null,
+      ownerName: item.owner,
       itemId: item.id,
+      itemName: item.name,
       rentalDate: null,
       confirmedDate: null,
       returnDate: null,
