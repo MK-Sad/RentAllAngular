@@ -85,9 +85,26 @@ export class MyItemsComponent implements OnInit, OnDestroy {
   itemReturned(item : Item) {
     this.itemService.returnItem(item.id)
       .subscribe(rental => {
+        item.rental = undefined;
         item.rented = false;
       });
-  } 
+  }
+
+  confirmRental(item : Item) {
+    this.rentalService.confirmRental(item.rental)
+      .subscribe(rental => {
+        item.rental = rental;
+        item.rented = true;
+      });
+  }
+
+  denyRental(item : Item) {
+    this.rentalService.denyRental(item.rental)
+      .subscribe(rental => {
+        item.rental = undefined;
+        item.rented = false;
+      });
+  }
 
   changeAvailable(item: Item) : void {
     this.itemService.updateItem(item)

@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Item } from '../item';
 import { Rental } from '../rental';
-import { RentalView } from '../rentalView';
 import { ItemService } from '../item.service';
 import { RentalService } from '../rental.service';
 import { ShareService } from '../share.service';
@@ -23,7 +22,6 @@ export class RentalsComponent implements OnInit, OnDestroy {
   private _subscription_rentalAdded: any;
   loggedUserName: string;
   rentals: Rental[] = [];
-  rentalsItems: RentalView[] = [];
   currentDate:number = Number(new Date().setHours(0,0,0,0));
 
   constructor(private itemService: ItemService, private rentalService: RentalService, private shareService: ShareService) {
@@ -50,7 +48,7 @@ export class RentalsComponent implements OnInit, OnDestroy {
   getItemByRental(rental: Rental): void {
     this.itemService.getItem(rental.itemId)
       .subscribe(item => 
-        rental['item'] = item
+        rental.item = item
       );
   }
 

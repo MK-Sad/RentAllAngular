@@ -10,17 +10,23 @@
 
     <div class="item-right">
         <div>
-            <div *ngIf="item.rented">
-                <span>Item is rented for {{item.rentalPeriod}} days</span><button (click)="itemReturned(item)">Confirm Return</button>
+            <div *ngIf="item.rental && item.rental.confirmedDate">
+                <span>Item is rented for {{item.rental.getRentalPeriod| date:'dd/MM/yyyy' : 'UTC'}}</span>
+                <button (click)="itemReturned(item)">Confirm Return</button>
             </div>
-            <div *ngIf="!item.rented">
+            <div *ngIf="item.rental && !item.rental.confirmedDate">
+                <span>Item is waiting for your decision</span>
+                <button (click)="confirmRental(item)">OK</button>
+                <button (click)="denyRental(item)">NO</button>
+            </div>
+            <div *ngIf="!item.rental">
                 <span *ngIf="item.available">Item is ready to rent for {{item.rentalPeriod}} days</span>
                 <span *ngIf="!item.available">Item is not available</span>
             </div>     
         </div>
         <div>
             <input type="checkbox" [(ngModel)]="item.available" 
-                (change)="changeAvailable(item)" [disabled]="item.rented" id="available" />
+                (change)="changeAvailable(item)" [disabled]="item.rental" id="available" />
             <label for="available">available to rent</label>
         </div>
         <div>     

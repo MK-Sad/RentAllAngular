@@ -52,6 +52,22 @@ export class RentalService {
     );
   }
 
+  confirmRental(rental: Rental): Observable<Rental> {
+    const url = `${this.url}/confirmRental/${rental.id}`;
+    return this.http.put<Rental>(url, rental, this.httpOptions).pipe(
+      tap((rental:Rental) => console.log(`confirmed rental w/ id=${rental.id}`)),
+      catchError(this.handleError<Rental>('confirmRental'))
+    );
+  }
+
+  denyRental(rental: Rental): Observable<Rental> {
+    const url = `${this.url}/denyRental/${rental.id}`;
+    return this.http.put<Rental>(url, rental, this.httpOptions).pipe(
+      tap((rental:Rental) => console.log(`added rental w/ id=${rental.id}`)),
+      catchError(this.handleError<Rental>('denyRental'))
+    );
+  }
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.

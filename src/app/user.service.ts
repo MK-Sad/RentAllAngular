@@ -29,6 +29,15 @@ export class UserService {
       catchError(this.handleError<UserPoints>('authentication'))
     );
   }
+
+  getUserPoints(userName: string): Observable<UserPoints> {
+    const url = `${this.url}/points/${userName}`;
+    return this.http.get<UserPoints>(url).pipe(
+      tap(_ => console.log(`fetched userPoints ${userName}`)),
+      catchError(this.handleError<UserPoints>(`getUserName=${userName}`))
+    );
+  }
+
 /*
   addItem(item: Item): Observable<Item> {
     const url = `${this.url}/item`; ///${item.id}
