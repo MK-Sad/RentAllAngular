@@ -4,6 +4,9 @@
     <span class="title">Edit your item</span>
   </h2>
   <main>
+    <div class = "img_frame">
+      <img (error)="changeImg($event)" [src]="(shareService.homeUrl + '/images/' + popUpItem.imageName)"/>
+    </div>
     <p>Name:</p> 
     <p><input type="text" [(ngModel)]="popUpItem.name"/></p>
     <p>Description:</p> 
