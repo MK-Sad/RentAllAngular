@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { UserCredentials } from './userCredentials';
 import { MessageService } from './message.service';
+import { UserPoints } from './userPoints';
 
 
 @Injectable({ providedIn: 'root' })
@@ -21,12 +22,22 @@ export class UserService {
     private http: HttpClient,
     private messageService: MessageService) { }
     
-  authenticate(userCredentials: UserCredentials): Observable<UserCredentials> {
+  authenticate(userCredentials: UserCredentials): Observable<UserPoints> {
     const url = `${this.url}/authenticate`;
-    return this.http.post<UserCredentials>(url, userCredentials, this.httpOptions).pipe(
-      catchError(this.handleError<UserCredentials>('authentication'))
+    return this.http.post<UserPoints>(url, userCredentials, this.httpOptions).pipe(
+      tap((userPoints:UserPoints) => console.log(`logged ${userPoints.name}, ${userPoints.points}`)),
+      catchError(this.handleError<UserPoints>('authentication'))
     );
   }
+
+  getUserPoints(userName: string): Observable<UserPoints> {
+    const url = `${this.url}/points/${userName}`;
+    return this.http.get<UserPoints>(url).pipe(
+      tap(_ => console.log(`fetched userPoints ${userName}`)),
+      catchError(this.handleError<UserPoints>(`getUserName=${userName}`))
+    );
+  }
+
 /*
   addItem(item: Item): Observable<Item> {
     const url = `${this.url}/item`; ///${item.id}
