@@ -1,26 +1,28 @@
 <div class="pop-up" *ngIf="popUpOpen">
 <div class="pop-up-box">
   <h2>
-    <span class="title">Edit your item</span>
+    <span class="title">Edytuj przedmiot</span>
   </h2>
   <main>
-    <p>Name:</p> 
+    <p>Nazwa:</p>
     <p><input type="text" [(ngModel)]="popUpItem.name"/></p>
-    <p>Description:</p> 
+    <p>Opis:</p>
     <p><input type="text" [(ngModel)]="popUpItem.description"/></p>
     <p>Image filename:</p> 
     <p><input type="text" [(ngModel)]="popUpItem.imageName"/></p>
-    <p>Category:
+    <p>Kategoria:
       <select [(ngModel)]="popUpItem.category">
         <option *ngFor="let category of categories" [value]="category">{{category}}</option>
       </select>
-    <p>Rental Period:</p> 
+
+    <p>Okres wypożyczenia:</p>
     <p><input type="number" min="1" max="7" [(ngModel)]="popUpItem.rentalPeriod"/>
+
     </p>
   </main>
   <footer>
-    <button (click)="saveItem()">Save</button>
-    <button (click)="closePopup()">Cancel</button>
+    <button (click)="saveItem()">Zapisz</button>
+    <button (click)="closePopup()">Anuluj</button>
   </footer>
 </div>
 </div>
