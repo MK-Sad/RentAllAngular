@@ -7,6 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { UserCredentials } from './userCredentials';
 import { MessageService } from './message.service';
 import { UserPoints } from './userPoints';
+import { User } from './user';
 
 
 @Injectable({ providedIn: 'root' })
@@ -38,23 +39,22 @@ export class UserService {
     );
   }
 
-/*
-  addItem(item: Item): Observable<Item> {
-    const url = `${this.url}/item`; ///${item.id}
-    return this.http.post<Item>(this.url, item, this.httpOptions).pipe(
-      tap((newItem:Item) => console.log(`added item w/ id=${newItem.id}`)),
-      catchError(this.handleError<Item>('addItem'))
+  addUser(user: User): Observable<User> {
+    const url = `${this.url}/user`; ///${user.id}
+    return this.http.post<User>(this.url, user, this.httpOptions).pipe(
+      tap((newUser:User) => console.log(`added user name=${newUser.name}`)),
+      catchError(this.handleError<User>('addUser'))
     );
   }
 
-  updateItem(item: Item): Observable<any> {
-    const url = `${this.url}/item`; ///${item.id}
-    return this.http.put(url, item, this.httpOptions).pipe(
-      tap(_ => console.log(`updated item id=${item.id}`)),
-      catchError(this.handleError<any>('updateItem'))
+  updateUser(user: User): Observable<any> {
+    const url = `${this.url}/user`; ///${user.id}
+    return this.http.put(url, user, this.httpOptions).pipe(
+      tap(_ => console.log(`updated user name=${user.name}`)),
+      catchError(this.handleError<any>('updateIUser'))
     );
   }
-  */
+  
   /**
    * Handle Http operation that failed.
    * Let the app continue.
