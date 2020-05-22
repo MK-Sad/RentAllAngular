@@ -6,12 +6,13 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Item } from './item';
 import { MessageService } from './message.service';
+import { ShareService } from './share.service';
 
 
 @Injectable({ providedIn: 'root' })
 export class ItemService {
 
-  private url = 'http://localhost:8080';  // URL to web api
+  private url = this.shareService.homeUrl;  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,7 +20,8 @@ export class ItemService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private shareService: ShareService) { }
 
 
   getCategories(): Observable<string[]> {

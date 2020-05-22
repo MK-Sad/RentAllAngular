@@ -10,7 +10,7 @@
   </div>
 
   <div class="item-right">
-    <div *ngIf="rental.confirmedDate"><span>owner: </span>{{rental.item.owner}}</div>
+    <div><span>owner: </span>{{rental.item.owner}}</div>
     <div *ngIf="rental.confirmedDate"><span>rental date: </span>{{rental.rentalDate| date:'dd/MM/yyyy' : 'UTC'}}</div>
     <div *ngIf="rental.confirmedDate"><span>rented for: </span>{{rental.rentalPeriod}}<span> days</span></div>
     <div *ngIf="rental.confirmedDate"><span>days left: </span>{{diff(rental.rentalDate, rental.rentalPeriod)}}</div>
