@@ -8,12 +8,13 @@ import { UserCredentials } from './userCredentials';
 import { MessageService } from './message.service';
 import { UserPoints } from './userPoints';
 import { User } from './user';
+import { ShareService } from './share.service';
 
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
-  private url = 'http://localhost:8080';  // URL to web api
+  private url = this.shareService.homeUrl;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,7 +22,8 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private shareService: ShareService) { }
     
   authenticate(userCredentials: UserCredentials): Observable<UserPoints> {
     const url = `${this.url}/authenticate`;
