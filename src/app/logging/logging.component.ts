@@ -16,7 +16,7 @@ export class LoggingComponent implements OnInit {
   loggedUserName: string;
   userPoints: number;
   userCredentials: UserCredentials;
-  background_graty: string = this.shareService.homeUrl + '/images/graty.jpg';
+  background_graty: string = this.shareService.homeUrl + '/images/tlo_logowanie1.jpg';
   logo: string = this.shareService.homeUrl + '/images/logo.png';
 
   changeUserName(): void {

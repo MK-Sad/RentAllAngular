@@ -1,3 +1,14 @@
+
+/* Application-wide Styles */
+
+html {
+  background-image: url(canstockphoto45204351.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  }
+
+
 .welcome {
   position: fixed;
   width: 100%;
@@ -11,7 +22,18 @@
   left: 0;
   right: 0;
   height: 100px;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Shopify Sans Web,Roboto,Segoe UI,Helvetica Neue,sans-serif;
+  color: #03414d;
+
+}
+
+.search {
+background-color: #A3BCBF;
+margin: 10px;
+padding: 10px;
+box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.4);
+overflow:auto;
+border-radius: 5px;
 }
 
 .logo {
@@ -23,8 +45,17 @@
   clip: rect(300px, 0px, 3000px, 0px);
 }
 
+.body_logo {
+  float: left;
+  width: max-content;
+ }
+
+.log_in_out {
+  text-align: right;
+   }
+
 .logging {
-  display: inline-grid; 
+
   margin: 10px;
 }
 
@@ -40,7 +71,8 @@
 .left .right {
   top: 100px;
   overflow-x: hidden;
-  padding: 10px;
+  padding: 50px;
+  background-color: rgba(255, 255, 255, 0.7) ;
 }
 
 .left {
@@ -54,11 +86,12 @@
 }
 
 .item {
+
   margin: 10px;
   padding: 10px;
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.4);
   overflow:auto;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.7) ;
   border-radius: 5px;
 }
 
@@ -75,7 +108,7 @@
 }
 
 .item button:hover {
-  background-color: lightgray;
+  background-color: #A3BCBF;
 }
 
 .item-right {
@@ -85,11 +118,12 @@
 
 .item-left {
   float: left;
+  width: 60%;
 }
 
 .clickable:hover div {
   transition: transform .4s;
-  background: rgb(211, 211, 211, 0.5)
+  background: #A3BCBF
 }
 
 .pop-up-box {
@@ -99,9 +133,9 @@
   top: 50%;
   left: 50%;
   padding: 20px;
-  background: white;
+  background: rgba(255, 255, 255, 0.7) ;
   text-align: center;
-  box-shadow: 4px 4px 10px #000;
+  box-shadow: 2px 2px 10px #000;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
@@ -114,35 +148,36 @@
 
 h1 {
     color: #369;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Shopify Sans Web,Roboto,Segoe UI,Helvetica Neue,sans-serif;
     font-size: 250%;
-  }
+    color: #03414d;
+}
 
 h2, h3 {
-    color: #444;
-    font-family: Arial, Helvetica, sans-serif;
+    color: #A3BCBF;
+    font-family: Shopify Sans Web,Roboto,Segoe UI,Helvetica Neue,sans-serif;
     font-weight: lighter;
-    margin-left: 20px;
-    margin-right: 20px;
+    color: #03414d;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
-body {
-    background-color: lightgrey;
-    margin: 0;
-  }
-  
+
+
 body, input[type="text"], button {
     color: #333;
-    font-family: Cambria, Georgia;
+    font-family: Shopify Sans Web,Roboto,Segoe UI,Helvetica Neue,sans-serif;
+    color: #03414d;
   }
 
   /* everywhere else */
   * {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Shopify Sans Web,Roboto,Segoe UI,Helvetica Neue,sans-serif;
+    color: #03414d;
   }
 
-@media only screen and (max-width: 800px) {
-    .left .right {
-      width: 100%;
+@media only screen and (max-width: 600px) {
+    .left, .right {
+      width: 98%;
     }
-}
+  }

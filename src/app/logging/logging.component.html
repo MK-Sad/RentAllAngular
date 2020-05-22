@@ -1,4 +1,4 @@
-<div class="welcome" *ngIf="!loggedUserName" [style.background-image]="'url(' + background_graty + ')'">
+<div class="welcome" *ngIf="!loggedUserName" [style.background]="'url(' + background_graty + ')'">
 <div class="pop-up-box" >
     <h2>
         <img [src]="logo" />
@@ -6,9 +6,9 @@
     </h2>
     <form #formData="ngForm" (ngSubmit)="login(formData)">
     <main>
-      <p>Nazwa użytkownika:</p> 
+      <p>Nazwa użytkownika:</p>
       <p><input ngModel name="name" required></p>
-      <p>Hasło:</p> 
+      <p>Hasło:</p>
       <p><input ngModel type="password" name="password" required></p>
     </main>
     <footer>
@@ -19,13 +19,13 @@
 </div>
 </div>
 
-Logged as: {{loggedUserName}}, points: {{userPoints}}
-<button (click)="changeUserName()">Reload</button> 
-<button (click)="logout()">Logout</button>
+Zalogowano jako: {{loggedUserName}}, punktów: {{userPoints}}
+<button (click)="changeUserName()">Odśwież</button>
+<button (click)="logout()">Wyloguj</button>
 
-
-<!-- 
+<!--
 <div  *ngIf="!loggedUserName">
     <img [src]="background" />
 </div>
 -->
+
