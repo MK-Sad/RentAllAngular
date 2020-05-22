@@ -18,23 +18,23 @@
         <div>
             <div *ngIf="item.rental && item.rental.confirmedDate">
                 <span>Item is rented for {{item.rental.getRentalPeriod| date:'dd/MM/yyyy' : 'UTC'}}</span>
-                <button (click)="itemReturned(item)">Confirm Return</button>
+                <button (click)="itemReturned(item)">Potwierdź zwrot</button>
             </div>
             <div *ngIf="item.rental && !item.rental.confirmedDate">
-                <span>Item is waiting for your decision</span>
+                <span>Przedmiot czeka na Twoją decyzję</span>
                 <button (click)="confirmRental(item)">OK</button>
                 <button (click)="denyRental(item)">NO</button>
             </div>
             <div *ngIf="!item.rental">
-                <span *ngIf="item.available">Item is ready to rent for {{item.rentalPeriod}} days</span>
-                <span *ngIf="!item.available">Item is not available</span>
-            </div>     
+                <span *ngIf="item.available">Przedmiot gotowy do wypożyczenia na {{item.rentalPeriod}} dni</span>
+                <span *ngIf="!item.available">Przedmiot jest niedostępny</span>
+            </div>
         </div>
         <div>
-            <input type="checkbox" [(ngModel)]="item.available" 
+            <input type="checkbox" [(ngModel)]="item.available"
                 (change)="changeAvailable(item)" [disabled]="item.rental" id="available" />
-            <label for="available">available to rent</label>
-        </div>
+            <label for="available">udostępnij</label>
+        </div><br>
         <div>
             <button (click)="openEditItem(item, i)">Edytuj</button>
         </div>

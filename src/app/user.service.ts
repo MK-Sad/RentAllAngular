@@ -21,7 +21,7 @@ export class UserService {
   constructor(
     private http: HttpClient,
     private messageService: MessageService) { }
-    
+
   authenticate(userCredentials: UserCredentials): Observable<UserPoints> {
     const url = `${this.url}/authenticate`;
     return this.http.post<UserPoints>(url, userCredentials, this.httpOptions).pipe(
@@ -67,15 +67,15 @@ export class UserService {
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
-      switch(error.error.status) { 
+      switch(error.error.status) {
         case 401: {
-          this.log(`Niepoprawne dane logowania.`); 
-          break; 
-        } 
+          this.log(`Niepoprawne dane logowania.`);
+          break;
+        }
         default: {
           this.log(`${operation} failed: ${error.message}`);
-          break; 
-        } 
+          break;
+        }
     }
       // Let the app keep running by returning an empty result.
       return of(result as T);

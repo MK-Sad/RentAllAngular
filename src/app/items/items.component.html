@@ -1,14 +1,14 @@
-<h2>
+<h2>Poszukuję... </h2>
+  <div class="search">
+    <h2>według kategorii:
+    <select [(ngModel)]="selectedCategory" (change)="changeCategory()">
+      <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+    </select><br><br>
+    według nazwy:
+    <input type="text" [(ngModel)]="namePart" (keyup)="searchByNamePart()"/>
+    </h2>
+  </div>
 
-  Poszukuję... <br><br>
-  według kategorii:
-  <select [(ngModel)]="selectedCategory" (change)="changeCategory()">
-    <option *ngFor="let category of categories" [value]="category">{{category}}</option>
-  </select><br>
-  według nazwy:
-
-  <input type="text" [(ngModel)]="namePart" (keyup)="searchByNamePart()"/>
-</h2>
 
 <div *ngIf="items == undefined || items.length == 0" class="item center">
   <h2>Niestety, nie znaleziono :(</h2>
