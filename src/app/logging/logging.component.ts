@@ -43,27 +43,3 @@ export class LoggingComponent implements OnInit {
   }
 
 }
-
-/*Piotr
-import { Component, OnInit } from ‘@angular/core’;
-import { AuthService } from ‘../auth.service’;
-import { NgForm } from ‘@angular/forms’;
-import { User } from ‘src/app/user’;
-@Component({
-  selector: ‘app-login’,
-  templateUrl: ‘./login.component.html’,
-  styleUrls: [‘./login.component.css’],
-})
-export class LoginComponent {
-  users = new Array<User>();
-  constructor(private authService: AuthService) {}
-  uzytkownik: User;
-  login(formData: NgForm) {
-    this.authService
-      .loginUser(formData.value.name, formData.value.password)
-      .subscribe((users) => {
-        this.uzytkownik = users;
-      });
-  }
-}
-*/
