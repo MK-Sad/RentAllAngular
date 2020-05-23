@@ -4,10 +4,15 @@
     <span class="title">Edit your item</span>
   </h2>
   <main>
+    <div class = "img_frame">
+      <img (error)="changeImg($event)" [src]="(shareService.homeUrl + '/images/' + popUpItem.imageName)"/>
+    </div>
     <p>Name:</p> 
     <p><input type="text" [(ngModel)]="popUpItem.name"/></p>
     <p>Description:</p> 
     <p><input type="text" [(ngModel)]="popUpItem.description"/></p>
+    <p>Image filename:</p> 
+    <p><input type="text" [(ngModel)]="popUpItem.imageName"/></p>
     <p>Category:
       <select [(ngModel)]="popUpItem.category">
         <option *ngFor="let category of categories" [value]="category">{{category}}</option>

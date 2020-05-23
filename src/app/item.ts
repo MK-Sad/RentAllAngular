@@ -1,3 +1,5 @@
+import { Rental } from './rental';
+
 export interface Item {
     id: number;
     name: string;
@@ -7,4 +9,6 @@ export interface Item {
     description: string;
     available: boolean;
     rented: boolean;
+    imageName: string;
+    rental?: Rental;
   }

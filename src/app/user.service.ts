@@ -6,12 +6,15 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { UserCredentials } from './userCredentials';
 import { MessageService } from './message.service';
+import { UserPoints } from './userPoints';
+import { User } from './user';
+import { ShareService } from './share.service';
 
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
-  private url = 'http://localhost:8080';  // URL to web api
+  private url = this.shareService.homeUrl;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,31 +22,41 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private shareService: ShareService) { }
     
-  authenticate(userCredentials: UserCredentials): Observable<UserCredentials> {
+  authenticate(userCredentials: UserCredentials): Observable<UserPoints> {
     const url = `${this.url}/authenticate`;
-    return this.http.post<UserCredentials>(url, userCredentials, this.httpOptions).pipe(
-      catchError(this.handleError<UserCredentials>('authentication'))
-    );
-  }
-/*
-  addItem(item: Item): Observable<Item> {
-    const url = `${this.url}/item`; ///${item.id}
-    return this.http.post<Item>(this.url, item, this.httpOptions).pipe(
-      tap((newItem:Item) => console.log(`added item w/ id=${newItem.id}`)),
-      catchError(this.handleError<Item>('addItem'))
+    return this.http.post<UserPoints>(url, userCredentials, this.httpOptions).pipe(
+      tap((userPoints:UserPoints) => console.log(`logged ${userPoints.name}, ${userPoints.points}`)),
+      catchError(this.handleError<UserPoints>('authentication'))
     );
   }
 
-  updateItem(item: Item): Observable<any> {
-    const url = `${this.url}/item`; ///${item.id}
-    return this.http.put(url, item, this.httpOptions).pipe(
-      tap(_ => console.log(`updated item id=${item.id}`)),
-      catchError(this.handleError<any>('updateItem'))
+  getUserPoints(userName: string): Observable<UserPoints> {
+    const url = `${this.url}/points/${userName}`;
+    return this.http.get<UserPoints>(url).pipe(
+      tap(_ => console.log(`fetched userPoints ${userName}`)),
+      catchError(this.handleError<UserPoints>(`getUserName=${userName}`))
     );
   }
-  */
+
+  addUser(user: User): Observable<User> {
+    const url = `${this.url}/user`; ///${user.id}
+    return this.http.post<User>(this.url, user, this.httpOptions).pipe(
+      tap((newUser:User) => console.log(`added user name=${newUser.name}`)),
+      catchError(this.handleError<User>('addUser'))
+    );
+  }
+
+  updateUser(user: User): Observable<any> {
+    const url = `${this.url}/user`; ///${user.id}
+    return this.http.put(url, user, this.httpOptions).pipe(
+      tap(_ => console.log(`updated user name=${user.name}`)),
+      catchError(this.handleError<any>('updateIUser'))
+    );
+  }
+  
   /**
    * Handle Http operation that failed.
    * Let the app continue.
