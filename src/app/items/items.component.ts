@@ -14,8 +14,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
   private _subscription_userName: any;
   loggedUserName: string;
-  items: Item[];
-  categories: string[];
+  items: Item[] = [];
+  categories: string[] = [];
   namePart: string;
   selectedCategory: string;
 
