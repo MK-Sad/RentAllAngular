@@ -14,6 +14,11 @@
   background-position: center;
 }
 
+.welcome2 {
+  background-attachment: fixed;
+  height: 90vh;
+}
+
 .header {
   top: 0;
   left: 0;
@@ -144,6 +149,29 @@
 .pop-up-box footer button {
   margin: 10px;
   width: 100px;
+}
+
+.empty {
+  background: transparent;
+  height: 100vh;
+  width: 1px;
+  position: relative;
+}
+
+.about {
+  position: relative;
+  background: white;
+  padding:100px;
+  text-align: center;
+}
+
+.bottom {
+  position: absolute;
+  height: 60vh;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
 }
 
 h1 {
