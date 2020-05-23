@@ -142,7 +142,7 @@ body, input[type="text"], button {
   }
 
 @media only screen and (max-width: 800px) {
-    .left .right {
+    .left, .right {
       width: 100%;
     }
 }
