@@ -41,6 +41,11 @@
   max-height:100%;
 }
 
+.centerDiv {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .center {
   text-align: center;
 }
@@ -103,9 +108,9 @@
 .pop-up-box {
   position: fixed;
   z-index:10000;
-  width: 30%;
   top: 50%;
   left: 50%;
+  width: 30%;
   padding: 20px;
   background: white;
   text-align: center;
@@ -113,6 +118,10 @@
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
+}
+
+.loader-box{
+  width: 120px;
 }
 
 .pop-up-box footer button {

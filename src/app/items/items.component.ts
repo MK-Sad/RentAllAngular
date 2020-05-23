@@ -42,8 +42,12 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   getItemsByCategory(): void {
+    this.shareService.loader = true;
     this.itemService.searchItemsByCategory(this.selectedCategory)
-      .subscribe(items => this.items = items);
+      .subscribe(items => {
+        this.shareService.loader = false;
+        this.items = items
+      });
   }
 
   getCategories(): void {
@@ -64,6 +68,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
 
   rentIt(item: Item): void {
+    this.shareService.loader = true;
     var rental: Rental = { 
       id: null,
       userName: this.loggedUserName,
@@ -76,9 +81,10 @@ export class ItemsComponent implements OnInit, OnDestroy {
       rentalPeriod: item.rentalPeriod };
     this.rentalService.addRental(rental)
       .subscribe(rental => {
-        rental['item'] = item;
+        rental.item = item;
         this.removeItem(item);
         this.shareService.rentalAdd(rental);
+        this.shareService.loader = false;
       });
   }
 
