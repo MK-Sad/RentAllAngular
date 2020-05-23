@@ -11,11 +11,12 @@
     <div class="item-right">
         <div>
             <div *ngIf="item.rental && item.rental.confirmedDate">
-                <span>Item is rented for {{item.rental.getRentalPeriod| date:'dd/MM/yyyy' : 'UTC'}}</span>
+                <span>Item is rented for {{item.rental.rentalPeriod}} days to {{item.rental.userName}}</span>
                 <button (click)="itemReturned(item)">Confirm Return</button>
             </div>
             <div *ngIf="item.rental && !item.rental.confirmedDate">
-                <span>Item is waiting for your decision</span>
+                <span>User {{item.rental.userName}} wants to rent this item. </span>
+                <span>Waiting for your decision</span>
                 <button (click)="confirmRental(item)">OK</button>
                 <button (click)="denyRental(item)">NO</button>
             </div>

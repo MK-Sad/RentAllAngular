@@ -1,4 +1,4 @@
-<div class="welcome" *ngIf="!loggedUserName" [style.background]="'url(' + background_graty + ')'">
+<div class="welcome" *ngIf="!loggedUserName" [style.background-image]="'url(' + background_graty + ')'">
 <div class="pop-up-box" >
     <h2>
         <img [src]="logo" />
@@ -19,7 +19,7 @@
 </div>
 </div>
 
-Logged as: {{loggedUserName}}, points: {{userPoints}}
+Logged as: {{loggedUserName}}, points: {{userPoints}} <!-- , points: {{userPoints}}-->
 <button (click)="changeUserName()">Reload</button> 
 <button (click)="logout()">Logout</button>
 

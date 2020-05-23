@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { Item } from 'src/app/item';
 import { ItemService } from 'src/app/item.service';
+import { ShareService } from 'src/app/share.service';
 
 @Component({
   selector: 'app-edit-window',
@@ -15,8 +16,9 @@ export class EditWindowComponent implements OnInit {
 
   categories: string[];
   private element: any;
+  private noImageURL: string = this.shareService.homeUrl + "/images/noImage.png";
   
-  constructor(private itemService: ItemService, private el: ElementRef) {
+  constructor(private itemService: ItemService, public shareService: ShareService, private el: ElementRef) {
     this.element = el.nativeElement;
    }
 
@@ -45,5 +47,9 @@ export class EditWindowComponent implements OnInit {
   getCategories(): void {
     this.itemService.getCategories()
     .subscribe(categories => this.categories = categories);
+  }
+
+  changeImg(event: any): void{
+    event.target.src = this.noImageURL;
   }
 }
