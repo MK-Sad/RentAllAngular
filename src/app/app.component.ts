@@ -10,6 +10,7 @@ export class AppComponent {
 
   constructor(private shareService: ShareService) {}
 
+  background: string = this.shareService.homeUrl + '/images/background.jpg';
   title = 'RentAll';
   logo: string = this.shareService.homeUrl + '/images/logo_transparent.png';
 }
