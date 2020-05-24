@@ -46,25 +46,6 @@ export class LoggingComponent implements OnInit {
       this.changeUserName();
     });
   }
-  openRegister() {
-    this.registerPopup = true;
-  }
-  backToLogin(): void {
-    this.registerPopup = false;
-  }
-  register(formData: NgForm): void {
-    const user: User = {
-      name: formData.value.name,
-      password: formData.value.password,
-      eMail: formData.value.eMail,
-      phoneNumber: formData.value.phoneNumber,
-      points: 0,
-    };
-    this.userService.updateUser(user).subscribe((x) => {
-      this.registerPopup = false;
-      console.log(x);
-    });
-  }
 
   openRegister():void {
     this.registerPopup = true;

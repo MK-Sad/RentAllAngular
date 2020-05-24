@@ -1,5 +1,7 @@
 <div *ngIf="!loggedUserName">
+
 <div class="welcome" *ngIf="!loggedUserName" [style.background-image]="'url(' + background_graty + ')'">
+
   <div class="pop-up-box" *ngIf="!registerPopup">
     <h2>
       <img [src]="logo" />
@@ -18,7 +20,6 @@
       </footer>
     </form>
   </div>
-</div>
 
 <div class="pop-up-box" *ngIf="registerPopup">
   <h2>
