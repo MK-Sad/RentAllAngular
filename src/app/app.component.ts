@@ -11,5 +11,6 @@ export class AppComponent {
   constructor(private shareService: ShareService) {}
 
   title = 'RentAll';
+  background: string = this.shareService.homeUrl + '/images/background.jpg';
   logo: string = this.shareService.homeUrl + '/images/logo_transparent.png';
 }

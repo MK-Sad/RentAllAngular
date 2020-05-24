@@ -3,7 +3,6 @@ import { ShareService } from '../share.service';
 import { UserCredentials } from '../userCredentials';
 import { UserService } from '../user.service';
 import { NgForm } from '@angular/forms';
-import { UserPoints } from './../userPoints';
 import { User } from '../user';
 
 @Component({
@@ -20,7 +19,8 @@ export class LoggingComponent implements OnInit {
   loggedUserName: string;
   userPoints: number;
   userCredentials: UserCredentials;
-  background_graty: string = this.shareService.homeUrl + '/images/graty.jpg';
+  background_graty: string = this.shareService.homeUrl + '/images/tlo_logowanie1.jpg';
+  hands: string = this.shareService.homeUrl + '/images/shaking-hands.jpg';
   logo: string = this.shareService.homeUrl + '/images/logo.png';
   registerPopup: boolean = false;
 
@@ -65,28 +65,26 @@ export class LoggingComponent implements OnInit {
       console.log(x);
     });
   }
-}
 
-/*Piotr
-import { Component, OnInit } from ‘@angular/core’;
-import { AuthService } from ‘../auth.service’;
-import { NgForm } from ‘@angular/forms’;
-import { User } from ‘src/app/user’;
-@Component({
-  selector: ‘app-login’,
-  templateUrl: ‘./login.component.html’,
-  styleUrls: [‘./login.component.css’],
-})
-export class LoginComponent {
-  users = new Array<User>();
-  constructor(private authService: AuthService) {}
-  uzytkownik: User;
-  login(formData: NgForm) {
-    this.authService
-      .loginUser(formData.value.name, formData.value.password)
-      .subscribe((users) => {
-        this.uzytkownik = users;
-      });
+  openRegister():void {
+    this.registerPopup = true;
+  }
+
+  backToLogin():void {
+    this.registerPopup = false;
+  }
+
+  register(formData: NgForm):void {
+    const user: User = {
+      name: formData.value.name,
+      password: formData.value.password,
+      eMail: formData.value.eMail,
+      phoneNumber: formData.value.phoneNumber,
+      points: 0
+    };
+    this.userService.updateUser(user).subscribe((x) => {
+      this.registerPopup = false;
+      console.log(x);
+    });
   }
 }
-*/

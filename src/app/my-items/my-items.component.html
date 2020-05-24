@@ -17,8 +17,8 @@
             <div *ngIf="item.rental && !item.rental.confirmedDate">
                 <span>User {{item.rental.userName}} wants to rent this item. </span>
                 <span>Waiting for your decision</span>
-                <button (click)="confirmRental(item)">OK</button>
-                <button (click)="denyRental(item)">NO</button>
+                <button class="half" (click)="confirmRental(item)">OK</button>
+                <button class="half" (click)="denyRental(item)">NO</button>
             </div>
             <div *ngIf="!item.rental">
                 <span *ngIf="item.available">Item is ready to rent for {{item.rentalPeriod}} days</span>

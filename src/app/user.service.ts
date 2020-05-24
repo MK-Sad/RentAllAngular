@@ -42,7 +42,7 @@ export class UserService {
   }
 
   addUser(user: User): Observable<User> {
-    const url = `${this.url}/user`; ///${user.id}
+    const url = `${this.url}/user`;
     return this.http.post<User>(this.url, user, this.httpOptions).pipe(
       tap((newUser:User) => console.log(`added user name=${newUser.name}`)),
       catchError(this.handleError<User>('addUser'))
@@ -50,7 +50,7 @@ export class UserService {
   }
 
   updateUser(user: User): Observable<any> {
-    const url = `${this.url}/user`; ///${user.id}
+    const url = `${this.url}/user`;
     return this.http.put(url, user, this.httpOptions).pipe(
       tap(_ => console.log(`updated user name=${user.name}`)),
       catchError(this.handleError<any>('updateIUser'))

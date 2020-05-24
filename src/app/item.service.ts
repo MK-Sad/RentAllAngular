@@ -12,7 +12,7 @@ import { ShareService } from './share.service';
 @Injectable({ providedIn: 'root' })
 export class ItemService {
 
-  private url = this.shareService.homeUrl;  // URL to web api
+  private url = this.shareService.homeUrl;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -94,8 +94,6 @@ export class ItemService {
     );
   }
 
-  //////// Save methods //////////
-
   addItem(item: Item): Observable<Item> {
     return this.http.post<Item>(this.url, item, this.httpOptions).pipe(
       tap((newItem:Item) => console.log(`added item w/ id=${newItem.id}`)),
@@ -129,27 +127,17 @@ export class ItemService {
     );
   }
 
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+      console.error(error);
 
-      // TODO: better job of transforming error for user consumption
       this.log(`${operation} failed: ${error.message}`);
 
-      // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }
 
-  /** Log a HeroService message with the MessageService */
   private log(message: string) {
     this.messageService.add(`Błąd: ${message}`);
   }
