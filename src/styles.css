@@ -84,9 +84,12 @@
   overflow:auto;
   background-color: rgba(255, 255, 255, 0.7) ;
   border-radius: 5px;
+}
+
+.item_grad {
   background: linear-gradient(to right,
-     rgba(255,255,255, 1) 50%, 
-     rgba(255,255,255, 0) 80%
+     rgba(255,255,255, 1) 15%, 
+     rgba(255,255,255, 0) 85%
   );
 }
 
@@ -200,7 +203,6 @@ h2, h3 {
   }
 
 body {
-    background-color: lightgrey;
     margin: 0;
   }
   
