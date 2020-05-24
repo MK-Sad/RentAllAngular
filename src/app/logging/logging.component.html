@@ -1,31 +1,69 @@
-<div class="welcome" *ngIf="!loggedUserName" [style.background-image]="'url(' + backgroundLogging + ')'">
-<div class="pop-up-box" >
+
+<div *ngIf="!loggedUserName">
+
+<div class="welcome" *ngIf="!loggedUserName" [style.background-image]="'url(' + background_graty + ')'">
+
+  <div class="pop-up-box" *ngIf="!registerPopup">
     <h2>
-        <img [src]="logo"/>
+      <img [src]="logo" />
       <span class="title">Zaloguj się</span>
     </h2>
     <form #formData="ngForm" (ngSubmit)="login(formData)">
+      <main>
+        <p>Nazwa użytkownika:</p>
+        <p><input ngModel name="name" required /></p>
+        <p>Hasło:</p>
+        <p><input ngModel type="password" name="password" required /></p>
+      </main>
+      <footer>
+        <button type="submit" [disabled]="formData.invalid">Zaloguj</button>
+        <button (click)="openRegister()">Zarejestruj się</button>
+      </footer>
+    </form>
+  </div>
+
+<div class="pop-up-box" *ngIf="registerPopup">
+  <h2>
+    <img [src]="logo" />
+    <span class="title">Zarejestruj się</span>
+  </h2>
+  <form #formData="ngForm" (ngSubmit)="register(formData)">
     <main>
       <p>Nazwa użytkownika:</p>
-      <p><input ngModel name="name" required></p>
+      <p><input ngModel name="name" required /></p>
       <p>Hasło:</p>
-      <p><input ngModel type="password" name="password" required></p>
+      <p><input ngModel type="password" name="password" required /></p>
+      <p>Email:</p>
+      <p><input ngModel type="email" name="eMail" required /></p>
+      <p>Numer telefonu:</p>
+      <p><input ngModel name="phoneNumber" required /></p>
     </main>
     <footer>
-        <button type="submit" [disabled]="formData.invalid">Zaloguj</button>
-      <button>Zarejestruj się</button>
+      <button type="submit" [disabled]="formData.invalid">
+        Zarejestruj sie
+      </button>
+      <button (click)="backToLogin()">Wróć</button>
     </footer>
-</form>
-</div>
+  </form>
 </div>
 
-Zalogowano jako: {{loggedUserName}}, punktów: {{userPoints}}
-<button (click)="changeUserName()">Odśwież</button>
-<button (click)="logout()">Wyloguj</button>
-
+</div>
 <!--
-<div  *ngIf="!loggedUserName">
-    <img [src]="background" />
+<div class="empty"></div>
+<div class="about">
+  <h1><i>RentAll to platforma lokalnych społeczności</i></h1>
+  <h1><i>Poznaj i polub swoich sąsiadów</i></h1>
+  <h1><i>Ich śmieci mogą być Twoim skarbem ;)</i></h1>
 </div>
+<div class="bottom" [style.background-image]="'url(' + hands + ')'"></div>
 -->
+
+</div>
+
+<div class="user">
+  Zalogowano jako: {{loggedUserName}}, punktów: {{userPoints}}
+  <button>Ustawienia</button>
+  <button (click)="logout()">Wyloguj</button>
+  <button (click)="changeUserName()">Odśwież</button> 
+</div>
 

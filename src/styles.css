@@ -1,18 +1,11 @@
 
-/* Application-wide Styles */
-
-html {
-  background-image: url(canstockphoto45204351.jpg);
-  background-repeat: no-repeat;
+.panel {
+  height: 100%;
+  width: 100%;
+  background-repeat: repeat;
   background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  }
-
-body {
-  margin: 0;
+  overflow-x: scroll;
 }
-
 
 .welcome {
   position: fixed;
@@ -50,17 +43,32 @@ border-radius: 5px;
   float: left;
 }
 
-.item.center {
-  text-align: center;
+.welcome2 {
+  background-attachment: fixed;
+  height: 90vh;
+}
+
+.header {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .logo {
- width: 20vh;
  overflow: hidden;
+ max-width: 400px;
 }
 
 .logo img {
-  clip: rect(300px, 0px, 3000px, 0px);
+  max-width: 100%;
+  margin-top: -35%;
+}
+
+.user {
+  float: right;
+  margin: 20px;
 }
 
 
@@ -75,12 +83,17 @@ border-radius: 5px;
 }
 
 .pop-up-box img {
+  max-width:100%;
+  max-height:100%;
+}
 
-  display: block;
+.centerDiv {
   margin-left: auto;
   margin-right: auto;
-  width: 100%;
+}
 
+.center {
+  text-align: center;
 }
 
 
@@ -109,26 +122,34 @@ border-radius: 5px;
   overflow:auto;
   background-color: rgba(255, 255, 255, 0.7) ;
   border-radius: 5px;
+  background: linear-gradient(to right,
+     rgba(255,255,255, 1) 50%, 
+     rgba(255,255,255, 0) 80%
+  );
+}
+
+.height120 {
+  min-height: 120px;
 }
 
 .img_frame {
-
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 40%;
-
+  width: 120px;
+  height: 120px;
+  text-align: center;
 }
 
 .item img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 20%;
+  max-height: 100%;
+  max-width: 100%;
+  vertical-align: middle;
 }
 
 .item button {
   width: 100%;
+}
+
+.item button.half {
+  width: 50%;
 }
 
 .item button:hover {
@@ -137,13 +158,17 @@ border-radius: 5px;
 
 .item-right {
   float: right;
-  width: 50%;
+  width: 47%;
 }
 
 .item-left {
   float: left;
-  width: 50%
+  max-width: 70%;
+}
 
+.item-left-big {
+  float: left;
+  max-width: 100%;
 }
 
 .clickable:hover div {
@@ -154,9 +179,9 @@ border-radius: 5px;
 .pop-up-box {
   position: fixed;
   z-index:10000;
-  width: 30%;
   top: 50%;
   left: 50%;
+  width: 30%;
   padding: 20px;
   background: rgba(255, 255, 255, 0.85) ;
   text-align: center;
@@ -167,25 +192,50 @@ border-radius: 5px;
 }
 
 
+.loader-box{
+  width: 120px;
+}
 
 .pop-up-box footer button {
   margin: 10px;
   width: 100px;
 }
 
+.empty {
+  background: transparent;
+  height: 100vh;
+  width: 1px;
+  position: relative;
+}
+
+.about {
+  position: relative;
+  background: white;
+  padding:100px;
+  text-align: center;
+}
+
+.bottom {
+  position: absolute;
+  height: 60vh;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
 h1 {
-    color: #369;
     font-family: Shopify Sans Web,Roboto,Segoe UI,Helvetica Neue,sans-serif;
     font-size: 250%;
     color: #03414d;
 }
 
 h2, h3 {
-    font-family: Shopify Sans Web,Roboto,Segoe UI,Helvetica Neue,sans-serif;
-    font-weight: 500;
-    color: #03414d;
-    margin-left: 10px;
-    margin-right: 10px;
+  font-family: Shopify Sans Web,Roboto,Segoe UI,Helvetica Neue,sans-serif;
+  font-weight: 500;
+  color: #03414d;
+  margin-left: 10px;
+  margin-right: 10px;
   }
 
 .description_part {
@@ -204,13 +254,60 @@ body, input[type="text"], button {
     color: #03414d;
   }
 
-@media only screen and (max-width: 700px) {
-    .left, .right {
-      width: 100%;
-    }
-  }
+
 
 @media all and (max-width:750px) {
 
     .header_center {background-position: center;}
   }
+
+@media only screen and (max-width: 1000px) {
+    .left, .right {
+      width: 100%;
+    }
+}
+
+
+
+
+
+.header_center {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 150px;
+  font-family: Shopify Sans Web,Roboto,Segoe UI,Helvetica Neue,sans-serif;
+  color: #03414d;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.search {
+background-color: rgba(163, 188, 191, 0.6);
+margin: 10px;
+padding: 10px;
+box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.4);
+overflow:auto;
+border-radius: 5px;
+}
+
+.search_methods {
+  width: 60%;
+  float: left;
+}
+
+
+html {
+  background-image: url(canstockphoto45204351.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  }
+
+
+@media all and (max-width:750px) {
+  .header_center {background-position: center;}
+}
+

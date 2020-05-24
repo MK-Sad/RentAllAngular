@@ -1,16 +1,19 @@
+<div class="panel" [style.background-image]="'url(' + background + ')'">
 
-
-<div class="log_in_out">
-  <app-logging></app-logging>
-</div>
-
-
+<app-logging></app-logging>
 
 <app-messages></app-messages>
 
+<div>
+<div class="header center">
+    <div class="logo"> 
+        <img [src]="logo" />
+    </div>
+</div>
 
-<div class="header_center"></div>
-
+<div class="right">
+    <app-items></app-items>
+</div>
 
 <div class="right">
   <app-items></app-items>

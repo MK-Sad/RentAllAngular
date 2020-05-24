@@ -9,6 +9,14 @@
       <input type="text" [(ngModel)]="namePart" (keyup)="searchByNamePart()"/>
     </h2>
     </div>
+  </div>
+
+<div class="item height120" *ngFor="let item of items">
+
+  <div class="item-left">
+    <div class = "img_frame">
+      <img *ngIf="item.imageName" [src]="(shareService.homeUrl + '/images/' + item.imageName)"/>
+    </div>
     <div class="glass"></div>
   </div>
 
@@ -33,5 +41,3 @@
   </div>
 
 </div>
-
-

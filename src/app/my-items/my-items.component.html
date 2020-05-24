@@ -17,14 +17,14 @@
     <div class="item-right">
         <div>
             <div *ngIf="item.rental && item.rental.confirmedDate">
-                <span>Item is rented for {{item.rental.rentalPeriod}} days to {{item.rental.userName}}</span>
+                <span>Przedmiot wypożyczony na {{item.rental.rentalPeriod}} dni przez {{item.rental.userName}}</span>
                 <button (click)="itemReturned(item)">Confirm Return</button>
             </div>
             <div *ngIf="item.rental && !item.rental.confirmedDate">
-                <span>User {{item.rental.userName}} wants to rent this item. </span>
+                <span>Użytkownik {{item.rental.userName}} chce pożyczyć ten przedmiot. </span>
                 <span>Przedmiot czeka na Twoją decyzję</span>
-                <button (click)="confirmRental(item)">OK</button>
-                <button (click)="denyRental(item)">NO</button>
+                <button class="half" (click)="confirmRental(item)">OK</button>
+                <button class="half" (click)="denyRental(item)">NO</button>
             </div>
             <div *ngIf="!item.rental">
                 <span *ngIf="item.available">Przedmiot gotowy do wypożyczenia na {{item.rentalPeriod}} dni</span>
@@ -35,8 +35,8 @@
             <input type="checkbox" [(ngModel)]="item.available"
                 (change)="changeAvailable(item)" [disabled]="item.rental" id="available" />
             <label for="available">udostępnij</label>
-        </div><br>
-        <div>
+        </div>
+        <div>     
             <button (click)="openEditItem(item, i)">Edytuj</button>
         </div>
     </div>
@@ -46,12 +46,6 @@
 <div *ngIf="items == undefined || items.length == 0" class="item center">
     <h2>Nic nie udostępniasz do wypożyczenia. <br> Pora to zmienić! :)</h2>
 </div>
-
-<a *ngIf="loggedUserName != undefined" class="clickable" (click)="openAddItem()">
-  <div class="item center">
-      <h2>Dodaj nowy przedmiot</h2>
-  </div>
-</a>
 
 <app-edit-window [popUpOpen]="popUpOpen" [popUpItem]="popUpItem" [myCallback]="theBoundCallback">
 </app-edit-window>
