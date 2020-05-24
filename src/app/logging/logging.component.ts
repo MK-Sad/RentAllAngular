@@ -3,6 +3,7 @@ import { ShareService } from '../share.service';
 import { UserCredentials } from '../userCredentials';
 import { UserService } from '../user.service';
 import { NgForm } from '@angular/forms';
+import { User } from '../user';
 
 @Component({
   selector: 'app-logging',
@@ -19,6 +20,7 @@ export class LoggingComponent implements OnInit {
   background_graty: string = this.shareService.homeUrl + '/images/tlo_logowanie1.jpg';
   hands: string = this.shareService.homeUrl + '/images/shaking-hands.jpg';
   logo: string = this.shareService.homeUrl + '/images/logo.png';
+  registerPopup: boolean = false;
 
   changeUserName(): void {
     this.shareService.userNameChange(this.loggedUserName);
@@ -41,6 +43,28 @@ export class LoggingComponent implements OnInit {
         this.userPoints = userPoints.points;
         this.changeUserName();
       });
+  }
+
+  openRegister():void {
+    this.registerPopup = true;
+  }
+
+  backToLogin():void {
+    this.registerPopup = false;
+  }
+
+  register(formData: NgForm):void {
+    const user: User = {
+      name: formData.value.name,
+      password: formData.value.password,
+      eMail: formData.value.eMail,
+      phoneNumber: formData.value.phoneNumber,
+      points: 0
+    };
+    this.userService.updateUser(user).subscribe((x) => {
+      this.registerPopup = false;
+      console.log(x);
+    });
   }
 
 }
