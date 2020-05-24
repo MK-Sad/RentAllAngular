@@ -9,6 +9,10 @@ html {
   background-position: center;
   }
 
+body {
+  margin: 0;
+}
+
 
 .welcome {
   position: fixed;
@@ -120,7 +124,7 @@ border-radius: 5px;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 40%;
+  width: 20%;
 }
 
 .item button {
@@ -138,6 +142,7 @@ border-radius: 5px;
 
 .item-left {
   float: left;
+  width: 50%
 
 }
 
