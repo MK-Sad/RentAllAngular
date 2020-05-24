@@ -28,7 +28,9 @@
 <div class="bottom" [style.background-image]="'url(' + hands + ')'"></div>
 </div>
 
-Logged as: {{loggedUserName}}, points: {{userPoints}}
-<button (click)="changeUserName()">Reload</button> 
-<button (click)="logout()">Logout</button>
-
+<div class="user">
+  Logged as: {{loggedUserName}}, points: {{userPoints}}
+  <button>Ustawienia</button>
+  <button (click)="logout()">Logout</button>
+  <button (click)="changeUserName()">Reload</button> 
+</div>
