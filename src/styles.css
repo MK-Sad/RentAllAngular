@@ -23,23 +23,28 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 90px;
+  min-height: 90px;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .logo {
  overflow: hidden;
- max-width: 400px;
+ width: 400px;
 }
 
 .logo img {
   max-width: 100%;
   margin-top: -35%;
+  margin-bottom: -35%;
 }
 
 .user {
   float: right;
   margin: 20px;
+}
+
+.user button {
+  margin: 5px;
 }
 
 .logging {
@@ -146,7 +151,8 @@
   z-index:10000;
   top: 50%;
   left: 50%;
-  width: 30%;
+  max-width: 30%;
+  min-width: 400px;
   padding: 20px;
   background: rgba(255, 255, 255, 0.85) ;
   text-align: center;
@@ -251,7 +257,6 @@ border-radius: 5px;
 }
 
 .search_methods {
-  width: 60%;
   float: left;
 }
 
@@ -265,7 +270,7 @@ html {
   }
 
 
-@media all and (max-width:750px) {
+@media all and (max-width:800px) {
 
   .header_center {background-position: center;}
 }
