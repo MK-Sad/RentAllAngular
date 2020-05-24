@@ -47,6 +47,7 @@ export class MyItemsComponent implements OnInit, OnDestroy {
   public theCallback(item: Item){
     this.popUpOpen = false;
     if (item != null) {
+      this.shareService.loader = true;
       const id = this.popUpItem.id;
       this.itemService.updateItem(item)
       .subscribe(item => {
@@ -54,7 +55,9 @@ export class MyItemsComponent implements OnInit, OnDestroy {
           this.items[this.popUpIndex] = item;
         } else {
           this.items.push(item);
-        }});
+        }
+        this.shareService.loader = false;
+      });
     }
   }
 
@@ -83,32 +86,41 @@ export class MyItemsComponent implements OnInit, OnDestroy {
   }
 
   itemReturned(item : Item) {
+    this.shareService.loader = true;
     this.itemService.returnItem(item.id)
       .subscribe(rental => {
         item.rental = undefined;
         item.rented = false;
+        this.shareService.loader = false;
       });
   }
 
   confirmRental(item : Item) {
+    this.shareService.loader = true;
     this.rentalService.confirmRental(item.rental)
       .subscribe(rental => {
         item.rental = rental;
         item.rented = true;
+        this.shareService.loader = false;
       });
   }
 
   denyRental(item : Item) {
+    this.shareService.loader = true;
     this.rentalService.denyRental(item.rental)
       .subscribe(rental => {
         item.rental = undefined;
         item.rented = false;
+        this.shareService.loader = false;
       });
   }
 
   changeAvailable(item: Item) : void {
+    this.shareService.loader = true;
     this.itemService.updateItem(item)
-    .subscribe(item => {});
+    .subscribe(item => {
+      this.shareService.loader = false;
+    });
     //TODO right panel refresh
   }
 
