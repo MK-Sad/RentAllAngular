@@ -91,7 +91,7 @@
 }
 
 .height120 {
-  height: 120px;
+  min-height: 120px;
 }
 
 .img_frame {
@@ -125,6 +125,12 @@
 
 .item-left {
   float: left;
+  max-width: 65%;
+}
+
+.item-left-big {
+  float: left;
+  max-width: 100%;
 }
 
 .clickable:hover div {

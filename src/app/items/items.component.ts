@@ -43,6 +43,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
   getItemsByCategory(): void {
     this.shareService.loader = true;
+    this.namePart = "";
     this.itemService.searchItemsByCategory(this.selectedCategory)
       .subscribe(items => {
         this.shareService.loader = false;
