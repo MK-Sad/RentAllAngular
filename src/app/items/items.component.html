@@ -1,12 +1,15 @@
 <h2>Poszukuję... </h2>
   <div class="search">
+    <div class="search_methods">
     <h2>według kategorii:
-    <select [(ngModel)]="selectedCategory" (change)="changeCategory()">
-      <option *ngFor="let category of categories" [value]="category">{{category}}</option>
-    </select><br><br>
+      <select [(ngModel)]="selectedCategory" (change)="changeCategory()">
+        <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+      </select><br><br>
     według nazwy:
-    <input type="text" [(ngModel)]="namePart" (keyup)="searchByNamePart()"/>
+      <input type="text" [(ngModel)]="namePart" (keyup)="searchByNamePart()"/>
     </h2>
+    </div>
+    <div class="glass"></div>
   </div>
 
 
@@ -18,23 +21,16 @@
 
   <div class="item-right">
     <button (click)="rentIt(item)" *ngIf="!(item.owner==loggedUserName)">
-      Rent {{ item.name }} for {{ item.rentalPeriod }} days</button>
-    <div *ngIf="!(selectedCategory)"><span>category: </span>{{item.category}}</div>
-  </div>
-
-  <div class="item-left">
-    <div class = "img_frame">
-      <img *ngIf="item.imageName" [src]="(shareService.homeUrl + '/images/' + item.imageName)"/>
-    </div>
+      Wypożycz {{ item.name }} na {{ item.rentalPeriod }} dni</button>
+    <div *ngIf="!(selectedCategory)"><span>kategoria: </span>{{item.category}}</div>
   </div>
 
   <div class="item-left">
     <h2>{{item.name}}</h2>
-    <div><span>owner: </span>{{item.owner}}</div>
-    <div><span>description: </span>{{item.description}}</div>
+      <div><span>właściciel: </span>{{item.owner}}</div>
+      <div><span>opis: </span>{{item.description}}</div>
   </div>
-
-
+     <img *ngIf="item.imageName" [src]="(shareService.homeUrl + '/images/' + item.imageName)"/>
 </div>
 
 

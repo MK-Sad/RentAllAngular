@@ -1,7 +1,7 @@
 <div class="welcome" *ngIf="!loggedUserName" [style.background-image]="'url(' + backgroundLogging + ')'">
 <div class="pop-up-box" >
     <h2>
-        <img [src]="logo" />
+        <img [src]="logo"/>
       <span class="title">Zaloguj się</span>
     </h2>
     <form #formData="ngForm" (ngSubmit)="login(formData)">
