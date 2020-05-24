@@ -1,51 +1,51 @@
-<h2>My items to rent</h2>
+<h2>Mogę pożyczyć:</h2>
+
+<a *ngIf="loggedUserName != undefined" class="clickable" (click)="openAddItem()">
+  <div class="item center">
+      <h2>Dodaj nowy przedmiot</h2>
+  </div>
+</a>
 
 <div class="item" *ngFor="let item of items; index as i">
 
     <div class="item-left">
         <h2>{{item.name}}</h2>
-        <div><span>category: </span>{{item.category}}</div>
-        <div><span>description: </span>{{item.description}}</div>
+        <div><span>kategoria: </span>{{item.category}}</div>
+        <div><span>opis: </span>{{item.description}}</div>
     </div>
 
     <div class="item-right">
         <div>
             <div *ngIf="item.rental && item.rental.confirmedDate">
-                <span>Item is rented for {{item.rental.rentalPeriod}} days to {{item.rental.userName}}</span>
+                <span>Przedmiot wypożyczony na {{item.rental.rentalPeriod}} dni przez {{item.rental.userName}}</span>
                 <button (click)="itemReturned(item)">Confirm Return</button>
             </div>
             <div *ngIf="item.rental && !item.rental.confirmedDate">
-                <span>User {{item.rental.userName}} wants to rent this item. </span>
-                <span>Waiting for your decision</span>
+                <span>Użytkownik {{item.rental.userName}} chce pożyczyć ten przedmiot. </span>
+                <span>Przedmiot czeka na Twoją decyzję</span>
                 <button class="half" (click)="confirmRental(item)">OK</button>
                 <button class="half" (click)="denyRental(item)">NO</button>
             </div>
             <div *ngIf="!item.rental">
-                <span *ngIf="item.available">Item is ready to rent for {{item.rentalPeriod}} days</span>
-                <span *ngIf="!item.available">Item is not available</span>
-            </div>     
+                <span *ngIf="item.available">Przedmiot gotowy do wypożyczenia na {{item.rentalPeriod}} dni</span>
+                <span *ngIf="!item.available">Przedmiot jest niedostępny</span>
+            </div>
         </div>
         <div>
-            <input type="checkbox" [(ngModel)]="item.available" 
+            <input type="checkbox" [(ngModel)]="item.available"
                 (change)="changeAvailable(item)" [disabled]="item.rental" id="available" />
-            <label for="available">available to rent</label>
+            <label for="available">udostępnij</label>
         </div>
         <div>     
-            <button (click)="openEditItem(item, i)">Edit</button>
+            <button (click)="openEditItem(item, i)">Edytuj</button>
         </div>
     </div>
 
 </div>
 
 <div *ngIf="items == undefined || items.length == 0" class="item center">
-    <h2>No items found</h2>
+    <h2>Nic nie udostępniasz do wypożyczenia. <br> Pora to zmienić! :)</h2>
 </div>
-
-<a *ngIf="loggedUserName != undefined" class="clickable" (click)="openAddItem()">
-    <div class="item center">
-        <h2>Add new item</h2>
-    </div>
-</a>
 
 <app-edit-window [popUpOpen]="popUpOpen" [popUpItem]="popUpItem" [myCallback]="theBoundCallback">
 </app-edit-window>

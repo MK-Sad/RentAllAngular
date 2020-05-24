@@ -1,24 +1,24 @@
-<h2>My rentals</h2>
+<h2>Pożyczone przeze mnie:</h2>
 
 <div class="item" *ngFor="let rental of rentals"
 [style.background]="diff(rental.confirmedDate, rental.rentalPeriod) < 1 ? 'rgb(255, 70, 70, 0.1)' : null">
 
   <div class="item-left">
     <h2>{{rental.item.name}}</h2>
-    <div><span>category: </span>{{rental.item.category}}</div>
-    <div><span>description: </span>{{rental.item.description}}</div>
+    <div><span>kategoria: </span>{{rental.item.category}}</div>
+    <div><span>opis: </span>{{rental.item.description}}</div>
   </div>
 
   <div class="item-right">
-    <div><span>owner: </span>{{rental.item.owner}}</div>
-    <div *ngIf="rental.confirmedDate"><span>rental date: </span>{{rental.rentalDate| date:'dd/MM/yyyy' : 'UTC'}}</div>
-    <div *ngIf="rental.confirmedDate"><span>rented for: </span>{{rental.rentalPeriod}}<span> days</span></div>
-    <div *ngIf="rental.confirmedDate"><span>days left: </span>{{diff(rental.rentalDate, rental.rentalPeriod)}}</div>
-    <div *ngIf="!rental.confirmedDate"><span>Reserved, waiting for user decision</span></div>
+    <div><span>właściciel: </span>{{rental.item.owner}}</div>
+    <div *ngIf="rental.confirmedDate"><span>data wypożyczenia: </span>{{rental.rentalDate| date:'dd/MM/yyyy' : 'UTC'}}</div>
+    <div *ngIf="rental.confirmedDate"><span>pożyczono na: </span>{{rental.rentalPeriod}}<span> dni</span></div>
+    <div *ngIf="rental.confirmedDate"><span>pozostało dni: </span>{{diff(rental.rentalDate, rental.rentalPeriod)}}</div>
+    <div *ngIf="!rental.confirmedDate"><span>zarezerwowano, oczekiwanie na decyzję</span></div>
   </div>
 
 </div>
 
 <div *ngIf="rentals == undefined || rentals.length == 0" class="item center">
-  <h2>No rentals found</h2>
+  <h2>Pusto!</h2>
 </div>
