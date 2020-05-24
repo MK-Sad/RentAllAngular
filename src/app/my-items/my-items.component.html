@@ -29,10 +29,10 @@
             <div *ngIf="!item.rental">
                 <span *ngIf="item.available">Przedmiot gotowy do wypożyczenia na {{item.rentalPeriod}} dni</span>
                 <span *ngIf="!item.available">Przedmiot jest niedostępny</span>
-            </div>     
+            </div>
         </div>
         <div>
-            <input type="checkbox" [(ngModel)]="item.available" 
+            <input type="checkbox" [(ngModel)]="item.available"
                 (change)="changeAvailable(item)" [disabled]="item.rental" id="available" />
             <label for="available">udostępnij</label>
         </div>
