@@ -6,6 +6,8 @@ import { Rental } from './rental';
 export class ShareService {
 
     homeUrl = 'https://rentall-app.herokuapp.com'; //'http://localhost:8080';
+    loader:boolean = false;
+    categories: string[] = [];
 
     userChange: Subject<any> = new Subject<any>();
     rentalAdded: Subject<any> = new Subject<any>();

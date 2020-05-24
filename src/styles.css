@@ -1,3 +1,11 @@
+.panel {
+  height: 100%;
+  width: 100%;
+  background-repeat: repeat;
+  background-size: cover;
+  overflow-x: scroll;
+}
+
 .welcome {
   position: fixed;
   width: 100%;
@@ -6,21 +14,32 @@
   background-position: center;
 }
 
+.welcome2 {
+  background-attachment: fixed;
+  height: 90vh;
+}
+
 .header {
   top: 0;
   left: 0;
   right: 0;
-  height: 100px;
+  height: 90px;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .logo {
- width: 20vh;
  overflow: hidden;
+ max-width: 400px;
 }
 
 .logo img {
-  clip: rect(300px, 0px, 3000px, 0px);
+  max-width: 100%;
+  margin-top: -35%;
+}
+
+.user {
+  float: right;
+  margin: 20px;
 }
 
 .logging {
@@ -31,6 +50,11 @@
 .pop-up-box img {
   max-width:100%;
   max-height:100%;
+}
+
+.centerDiv {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .center {
@@ -60,18 +84,34 @@
   overflow:auto;
   background-color: white;
   border-radius: 5px;
+  background: linear-gradient(to right,
+     rgba(255,255,255, 1) 50%, 
+     rgba(255,255,255, 0) 80%
+  );
+}
+
+.height120 {
+  height: 120px;
 }
 
 .img_frame {
   width: 120px;
+  height: 120px;
+  text-align: center;
 }
 
 .item img {
-  height: 120px;
+  max-height: 100%;
+  max-width: 100%;
+  vertical-align: middle;
 }
 
 .item button {
   width: 100%;
+}
+
+.item button.half {
+  width: 50%;
 }
 
 .item button:hover {
@@ -95,9 +135,9 @@
 .pop-up-box {
   position: fixed;
   z-index:10000;
-  width: 30%;
   top: 50%;
   left: 50%;
+  width: 30%;
   padding: 20px;
   background: white;
   text-align: center;
@@ -107,9 +147,36 @@
   -moz-transform: translate(-50%, -50%);
 }
 
+.loader-box{
+  width: 120px;
+}
+
 .pop-up-box footer button {
   margin: 10px;
   width: 100px;
+}
+
+.empty {
+  background: transparent;
+  height: 100vh;
+  width: 1px;
+  position: relative;
+}
+
+.about {
+  position: relative;
+  background: white;
+  padding:100px;
+  text-align: center;
+}
+
+.bottom {
+  position: absolute;
+  height: 60vh;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
 }
 
 h1 {
@@ -141,8 +208,8 @@ body, input[type="text"], button {
     font-family: Arial, Helvetica, sans-serif;
   }
 
-@media only screen and (max-width: 800px) {
-    .left .right {
+@media only screen and (max-width: 1000px) {
+    .left, .right {
       width: 100%;
     }
 }

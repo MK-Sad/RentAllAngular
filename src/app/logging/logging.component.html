@@ -1,3 +1,4 @@
+<div *ngIf="!loggedUserName">
 <div class="welcome" *ngIf="!loggedUserName" [style.background-image]="'url(' + background_graty + ')'">
 <div class="pop-up-box" >
     <h2>
@@ -18,14 +19,18 @@
 </form>
 </div>
 </div>
-
-Logged as: {{loggedUserName}}, points: {{userPoints}} <!-- , points: {{userPoints}}-->
-<button (click)="changeUserName()">Reload</button> 
-<button (click)="logout()">Logout</button>
-
-
-<!-- 
-<div  *ngIf="!loggedUserName">
-    <img [src]="background" />
+<div class="empty"></div>
+<div class="about">
+  <h1><i>RentAll to platforma lokalnych społeczności</i></h1>
+  <h1><i>Poznaj i polub swoich sąsiadów</i></h1>
+  <h1><i>Ich śmieci mogą być Twoim skarbem</i></h1>
 </div>
--->
+<div class="bottom" [style.background-image]="'url(' + hands + ')'"></div>
+</div>
+
+<div class="user">
+  Logged as: {{loggedUserName}}, points: {{userPoints}}
+  <button>Ustawienia</button>
+  <button (click)="logout()">Logout</button>
+  <button (click)="changeUserName()">Reload</button> 
+</div>
