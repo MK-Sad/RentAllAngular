@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ShareService } from './share.service';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'RentAll-app';
-  loggedUserName = "Robert";
+
+  constructor(private shareService: ShareService) {}
+
+  title = 'RentAll';
+  background: string = this.shareService.homeUrl + '/images/background.jpg';
+  logo: string = this.shareService.homeUrl + '/images/logo_transparent.png';
 }

@@ -1,26 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Item } from '../item';
 import { Rental } from '../rental';
 import { ItemService } from '../item.service';
 import { RentalService } from '../rental.service';
+import { ShareService } from '../share.service';
 
 @Component({
   selector: 'app-items',
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.css']
 })
-export class ItemsComponent implements OnInit {
+export class ItemsComponent implements OnInit, OnDestroy {
 
-  items: Item[];
-  categories: string[];
-  category: string;
+  private _subscription_userName: any;
+  loggedUserName: string;
+  items: Item[] = [];
+  categories: string[] = [];
+  namePart: string;
   selectedCategory: string;
 
-  constructor(private itemService: ItemService, private rentalService: RentalService) { }
+  constructor(private itemService: ItemService, private rentalService: RentalService, public shareService : ShareService) {
+    this._subscription_userName = this.shareService.userChange.subscribe((value) => {
+      this.onUserNameChange(value);
+    });
+   }
 
-  getItemsByCategory(category: string): void {
-    this.itemService.searchItemsByCategory(category)
-      .subscribe(items => this.items = items);
+  onUserNameChange(newUserName: string) : void {
+    this.loggedUserName = newUserName;
+    if (newUserName != null) {
+      this.selectedCategory = "TOOLS";
+      this.getItemsByCategory();
+    } else {
+      this.items = [];
+    }
+  } 
+
+  ngOnInit(): void {
+    this.getCategories();
+    this.selectedCategory = "TOOLS";
+    this.getItemsByCategory();
+  }
+
+  getItemsByCategory(): void {
+    this.shareService.loader = true;
+    this.namePart = "";
+    this.itemService.searchItemsByCategory(this.selectedCategory)
+      .subscribe(items => {
+        this.shareService.loader = false;
+        this.items = items
+      });
   }
 
   getCategories(): void {
@@ -29,25 +57,45 @@ export class ItemsComponent implements OnInit {
   }
 
   changeCategory(): void {
-    this.getItemsByCategory(this.selectedCategory);
+    this.getItemsByCategory();
   }
 
-  rentIt(event, item: Item): void {
+  searchByNamePart(): void {
+    if (this.namePart.length > 2) {
+      this.selectedCategory = null;
+      this.itemService.searchItemsByNamePart(this.namePart)
+      .subscribe(items => this.items = items);
+    }
+  }
+
+  rentIt(item: Item): void {
+    this.shareService.loader = true;
     var rental: Rental = { 
       id: null,
-      userName: "Robert",
+      userName: this.loggedUserName,
+      ownerName: item.owner,
       itemId: item.id,
+      itemName: item.name,
       rentalDate: null,
+      confirmedDate: null,
       returnDate: null,
-      rentalPeriod: 3 };
+      rentalPeriod: item.rentalPeriod };
     this.rentalService.addRental(rental)
-      .subscribe(rental => {console.log("Rental has been saved: " + rental.id)});
+      .subscribe(rental => {
+        rental.item = item;
+        this.removeItem(item);
+        this.shareService.rentalAdd(rental);
+        this.shareService.loader = false;
+      });
   }
 
-  ngOnInit(): void {
-    this.getCategories();
-    this.selectedCategory = "TOOLS";
-    this.getItemsByCategory(this.selectedCategory);
+  removeItem(item: Item){
+    const index: number = this.items.indexOf(item);
+    this.items.splice(index, 1);
+  }
+
+  ngOnDestroy(): void {
+    this._subscription_userName.unsubscribe();
   }
 
 }

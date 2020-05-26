@@ -1,5 +1,14 @@
-<div class="header">
-    <h1>{{title}}</h1>
+<div class="panel" [style.background-image]="'url(' + background + ')'">
+
+<app-logging></app-logging>
+
+<app-messages></app-messages>
+
+<div>
+<div class="header center">
+    <div class="logo"> 
+        <img [src]="logo" />
+    </div>
 </div>
 
 <div class="left">
@@ -10,8 +19,9 @@
 <div class="right">
     <app-items></app-items>
 </div>
+</div>
 
-
+</div>
 
 
 

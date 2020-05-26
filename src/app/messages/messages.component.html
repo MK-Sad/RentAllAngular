@@ -1,8 +1,16 @@
-<div *ngIf="messageService.messages.length">
+<div class="pop-up" *ngIf="messageService.messages.length">
+    <div class="pop-up-box">
+        <h2>Message</h2>
+        <div *ngFor='let message of messageService.messages'> {{message}} </div>
+        <footer>
+            <button class="clear" (click)="messageService.clear()">OK</button>
+        </footer>
+    </div>
+</div>
 
-    <h2>Messages</h2>
-    <button class="clear"
-            (click)="messageService.clear()">clear</button>
-    <div *ngFor='let message of messageService.messages'> {{message}} </div>
-  
-  </div>
+
+<div class="loader" *ngIf="shareService.loader">
+    <div class="pop-up-box loader-box">
+        <div class="loader circle-loader-1"></div>
+    </div>
+</div>

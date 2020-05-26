@@ -1,35 +1,43 @@
-/* MessagesComponent's private CSS styles */
-h2 {
-    color: red;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: lighter;
-  }
-  body {
-    margin: 2em;
-  }
-  body, input[text], button {
-    color: crimson;
-    font-family: Cambria, Georgia;
+  
+  
+  .loader {
+    min-width: 100px;
   }
   
-  button.clear {
-    font-family: Arial;
-    background-color: #eee;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    cursor: hand;
+  /* circle loaders */
+  
+  .circle-loader-1 {
+    width: 100px;
+    min-width: 100px;
+    height: 100px;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    border-radius: 50%;
+    border-top: 10px solid rgba(25, 25, 25, 0.2);
+    border-right: 10px solid rgba(25, 25, 25, 0.2);
+    border-bottom: 10px solid rgba(25, 25, 25, 0.2);
+    border-left: 10px solid rgba(25, 25, 25, 1);
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: circle-loader-spin 1s infinite linear;
+    animation: circle-loader-spin 1s infinite linear;
   }
-  button:hover {
-    background-color: #cfd8dc;
+  
+
+  
+  @keyframes circle-loader-spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
   }
-  button:disabled {
-    background-color: #eee;
-    color: #aaa;
-    cursor: auto;
-  }
-  button.clear {
-    color: #333;
-    margin-bottom: 12px;
-  }
+  
