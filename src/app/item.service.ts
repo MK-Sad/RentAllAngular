@@ -25,7 +25,7 @@ export class ItemService {
 
 
   getCategories(): Observable<string[]> {
-    const url = `${this.url}/categories`;
+    const url = `${this.url}/categories/pl`;
     return this.http.get<string[]>(url).pipe(
       tap(_ => console.log(`fetched categories`)),
       catchError(this.handleError<string[]>(`getCategories`))
@@ -95,7 +95,8 @@ export class ItemService {
   }
 
   addItem(item: Item): Observable<Item> {
-    return this.http.post<Item>(this.url, item, this.httpOptions).pipe(
+    const url = `${this.url}/item`;
+    return this.http.post<Item>(url, item, this.httpOptions).pipe(
       tap((newItem:Item) => console.log(`added item w/ id=${newItem.id}`)),
       catchError(this.handleError<Item>('addItem'))
     );

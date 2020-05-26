@@ -63,7 +63,7 @@ export class LoggingComponent implements OnInit {
       phoneNumber: formData.value.phoneNumber,
       points: 0
     };
-    this.userService.updateUser(user).subscribe((x) => {
+    this.userService.addUser(user).subscribe((x) => {
       this.registerPopup = false;
       console.log(x);
     });

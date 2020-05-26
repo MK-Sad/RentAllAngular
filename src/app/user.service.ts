@@ -43,7 +43,7 @@ export class UserService {
 
   addUser(user: User): Observable<User> {
     const url = `${this.url}/user`;
-    return this.http.post<User>(this.url, user, this.httpOptions).pipe(
+    return this.http.post<User>(url, user, this.httpOptions).pipe(
       tap((newUser:User) => console.log(`added user name=${newUser.name}`)),
       catchError(this.handleError<User>('addUser'))
     );
@@ -73,7 +73,11 @@ export class UserService {
         case 401: {
           this.log(`Niepoprawne dane logowania.`); 
           break; 
-        } 
+        }
+        case 409: {
+          this.log(`Użytkownik z taką nazwą już istnieje.`); 
+          break; 
+        }  
         default: {
           this.log(`${operation} failed: ${error.message}`);
           break; 
@@ -86,6 +90,6 @@ export class UserService {
 
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
-    this.messageService.add(`Błąd ${message}`);
+    this.messageService.add(`Błąd. ${message}`);
   }
 }
